@@ -1,81 +1,80 @@
 import streamlit as st
-import mysql.connector
-import hashlib
+import sqlite3
 
-def get_db_connection():
-    return mysql.connector.connect(
-        host="localhost",
-        user="seu_usuario",
-        password="sua_senha",
-        database="seu_banco"
-    )
+# Conectar ao banco de dados SQLite
+def create_connection():
+    conn = sqlite3.connect("users.db")
+    return conn
 
-def hash_password(password):
-    return hashlib.sha256(password.encode()).hexdigest()
-
-def create_users_table():
-    conn = get_db_connection()
+# Criar tabela de usuários
+def create_table():
+    conn = create_connection()
     cursor = conn.cursor()
     cursor.execute('''CREATE TABLE IF NOT EXISTS users (
-                        id INT AUTO_INCREMENT PRIMARY KEY,
-                        username VARCHAR(50) UNIQUE NOT NULL,
-                        password VARCHAR(255) NOT NULL
-                      )''')
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        username TEXT UNIQUE,
+                        password TEXT,
+                        is_admin INTEGER DEFAULT 0)''')
     conn.commit()
-    cursor.close()
     conn.close()
 
-def register_user(username, password):
-    conn = get_db_connection()
+# Inserir usuário
+def insert_user(username, password, is_admin=0):
+    conn = create_connection()
     cursor = conn.cursor()
     try:
-        cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, hash_password(password)))
+        cursor.execute("INSERT INTO users (username, password, is_admin) VALUES (?, ?, ?)", (username, password, is_admin))
         conn.commit()
-        return True
-    except mysql.connector.IntegrityError:
-        return False
-    finally:
-        cursor.close()
-        conn.close()
-
-def login_user(username, password):
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT password FROM users WHERE username = %s", (username,))
-    user = cursor.fetchone()
-    cursor.close()
+    except sqlite3.IntegrityError:
+        st.error("Usuário já existe!")
     conn.close()
-    if user and user[0] == hash_password(password):
-        return True
-    return False
 
-def main():
-    st.title("Sistema de Login")
-    menu = ["Login", "Cadastro"]
-    choice = st.sidebar.selectbox("Menu", menu)
-    
-    create_users_table()
-    
-    if choice == "Login":
-        st.subheader("Login")
-        username = st.text_input("Usuário")
-        password = st.text_input("Senha", type="password")
-        if st.button("Entrar"):
-            if login_user(username, password):
-                st.success(f"Bem-vindo, {username}!")
-            else:
-                st.error("Usuário ou senha incorretos")
-    
-    elif choice == "Cadastro":
-        st.subheader("Cadastro de Usuário")
-        new_user = st.text_input("Usuário")
-        new_password = st.text_input("Senha", type="password")
-        if st.button("Cadastrar"):
-            if register_user(new_user, new_password):
-                st.success("Usuário cadastrado com sucesso! Agora você pode fazer login.")
-            else:
-                st.error("Usuário já existe. Escolha outro nome.")
+# Verificar login
+def check_login(username, password):
+    conn = create_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT is_admin FROM users WHERE username = ? AND password = ?", (username, password))
+    user = cursor.fetchone()
+    conn.close()
+    return user
 
-if __name__ == "__main__":
-    main()
+# Criar tabela ao iniciar
+def initialize_db():
+    create_table()
+    # Criar admin se não existir
+    conn = create_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE username = 'nicolas'")
+    if not cursor.fetchone():
+        insert_user("nicolas", "123", is_admin=1)
+    conn.close()
+
+initialize_db()
+
+# Interface Streamlit
+st.title("Sistema de Login com SQLite")
+
+menu = ["Login", "Registrar"]
+choice = st.sidebar.selectbox("Menu", menu)
+
+if choice == "Login":
+    st.subheader("Login")
+    username = st.text_input("Usuário")
+    password = st.text_input("Senha", type="password")
+    if st.button("Entrar"):
+        user = check_login(username, password)
+        if user:
+            st.success(f"Bem-vindo, {username}!")
+            if user[0] == 1:
+                st.info("Você está logado como administrador.")
+        else:
+            st.error("Usuário ou senha incorretos!")
+
+elif choice == "Registrar":
+    st.subheader("Registrar Novo Usuário")
+    new_user = st.text_input("Novo Usuário")
+    new_pass = st.text_input("Nova Senha", type="password")
+    if st.button("Registrar"):
+        insert_user(new_user, new_pass)
+        st.success("Usuário registrado com sucesso! Agora você pode fazer login.")
 
