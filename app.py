@@ -1,80 +1,55 @@
 import streamlit as st
 import sqlite3
 
-# Conectar ao banco de dados SQLite
+# Função para conectar ao banco de dados
 def create_connection():
-    conn = sqlite3.connect("users.db")
+    conn = sqlite3.connect('usuarios.db')
     return conn
 
-# Criar tabela de usuários
-def create_table():
-    conn = create_connection()
-    cursor = conn.cursor()
-    cursor.execute('''CREATE TABLE IF NOT EXISTS users (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        username TEXT UNIQUE,
-                        password TEXT,
-                        is_admin INTEGER DEFAULT 0)''')
-    conn.commit()
-    conn.close()
-
-# Inserir usuário
-def insert_user(username, password, is_admin=0):
-    conn = create_connection()
-    cursor = conn.cursor()
-    try:
-        cursor.execute("INSERT INTO users (username, password, is_admin) VALUES (?, ?, ?)", (username, password, is_admin))
-        conn.commit()
-    except sqlite3.IntegrityError:
-        st.error("Usuário já existe!")
-    conn.close()
-
-# Verificar login
+# Função para verificar as credenciais de login
 def check_login(username, password):
     conn = create_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT is_admin FROM users WHERE username = ? AND password = ?", (username, password))
-    user = cursor.fetchone()
+    c = conn.cursor()
+    c.execute('SELECT * FROM usuarios WHERE username = ? AND password = ?', (username, password))
+    user = c.fetchone()
     conn.close()
     return user
 
-# Criar tabela ao iniciar
-def initialize_db():
-    create_table()
-    # Criar admin se não existir
+# Função para registrar um novo usuário
+def register_user(username, password):
     conn = create_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM users WHERE username = 'nicolas'")
-    if not cursor.fetchone():
-        insert_user("nicolas", "123", is_admin=1)
+    c = conn.cursor()
+    try:
+        c.execute('INSERT INTO usuarios (username, password) VALUES (?, ?)', (username, password))
+        conn.commit()
+        st.success('Usuário registrado com sucesso!')
+    except sqlite3.IntegrityError:
+        st.error('Erro: Nome de usuário já existe.')
     conn.close()
 
-initialize_db()
+# Interface do usuário
+st.title('Sistema de Login com Streamlit e SQLite')
 
-# Interface Streamlit
-st.title("Sistema de Login com SQLite")
+menu = ['Login', 'Registrar']
+choice = st.sidebar.selectbox('Menu', menu)
 
-menu = ["Login", "Registrar"]
-choice = st.sidebar.selectbox("Menu", menu)
-
-if choice == "Login":
-    st.subheader("Login")
-    username = st.text_input("Usuário")
-    password = st.text_input("Senha", type="password")
-    if st.button("Entrar"):
+if choice == 'Login':
+    st.subheader('Página de Login')
+    username = st.text_input('Nome de usuário')
+    password = st.text_input('Senha', type='password')
+    if st.button('Entrar'):
         user = check_login(username, password)
         if user:
-            st.success(f"Bem-vindo, {username}!")
-            if user[0] == 1:
-                st.info("Você está logado como administrador.")
+            st.success(f'Bem-vindo, {username}!')
+            if user[3] == 1:
+                st.info('Você é um administrador.')
         else:
-            st.error("Usuário ou senha incorretos!")
+            st.error('Nome de usuário ou senha incorretos.')
 
-elif choice == "Registrar":
-    st.subheader("Registrar Novo Usuário")
-    new_user = st.text_input("Novo Usuário")
-    new_pass = st.text_input("Nova Senha", type="password")
-    if st.button("Registrar"):
-        insert_user(new_user, new_pass)
-        st.success("Usuário registrado com sucesso! Agora você pode fazer login.")
+elif choice == 'Registrar':
+    st.subheader('Página de Registro')
+    new_username = st.text_input('Novo nome de usuário')
+    new_password = st.text_input('Nova senha', type='password')
+    if st.button('Registrar'):
+        register_user(new_username, new_password)
 
