@@ -19,6 +19,8 @@ Nicolas Rossi Gariba
 
 ---
 
+https://stockyutfpr.streamlit.app/
+
 ## Requisitos Mínimos
 
 Antes de executar o site, certifique-se de ter as seguintes ferramentas instaladas no seu sistema:
