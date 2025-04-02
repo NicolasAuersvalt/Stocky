@@ -37,7 +37,7 @@ Para desenvolver, use:
     git clone https://github.com/NicolasAuersvalt/Stocky.git
     cd Stocky
 
-Para instalar o jogo, execute o script `install.sh`:
+Para instalar as dependências, execute o script `instalador.sh`:
 
     chmod +x instalador.sh
     ./instalador.sh
