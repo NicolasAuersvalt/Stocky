@@ -25,6 +25,8 @@ Antes de executar o site, certifique-se de ter as seguintes ferramentas instalad
 
 python 3.8
 
+streamlit
+
 ## Instalação
 
 Para desenvolver, use:
