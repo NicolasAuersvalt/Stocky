@@ -1,0 +1,757 @@
+8/28/24, 6:42 PM - Gabriel: da pra tentar usar integral de exponencial
+8/28/24, 8:04 PM - Nícolas Auersvalt: deixa eu ver
+8/28/24, 8:51 PM - Nícolas Auersvalt: <Media omitted>
+8/28/24, 9:01 PM - Gabriel: boaaaa
+8/29/24, 2:42 PM - Gabriel: To no trampo agora. Sobre o que que é?
+8/29/24, 5:14 PM - Nícolas Auersvalt: Hipótese de Riemann
+8/29/24, 9:31 PM - Gabriel: rapazeada
+8/29/24, 9:32 PM - Gabriel: tenho um problema que não consigo resolver: o que é mais gay... dar o c* ou chupar uma r*la?
+8/29/24, 9:34 PM - Pedro: Vc tem que testar empiricamente
+8/29/24, 10:02 PM - Nícolas Auersvalt: Chupar, porque você se coloca numa posição de dominado, abaixo de alguém
+8/29/24, 10:02 PM - Nícolas Auersvalt: Essa é antiga
+8/29/24, 10:13 PM - Gabriel: mas de 4 vc ta abaixo também. Mas entendi seu ponto
+8/29/24, 10:13 PM - Gabriel: quem colocou isso na minha cabeça foi minha namorada
+8/29/24, 10:14 PM - Gabriel: obrigado pela contribuição, rapazes
+8/30/24, 10:04 AM - Nícolas Auersvalt: Vcs sabem o que é a função de Bessel?
+8/30/24, 10:05 AM - Nícolas Auersvalt: Ser EDO de primeira ordem significa que ela possui variáveis reais e não precisa ir aos complexos?
+8/30/24, 10:37 PM - Gabriel: <Media omitted>
+8/30/24, 10:38 PM - Gabriel: apostila de EDO pica da mlr prof
+8/30/24, 10:39 PM - Gabriel: <Media omitted>
+8/30/24, 10:40 PM - Gabriel: <Media omitted>
+8/30/24, 10:48 PM - Nícolas Auersvalt: Tá na balada mandando EDO
+8/30/24, 10:49 PM - Nícolas Auersvalt: Vlw, vou dar uma lida dps desse caos de campeonato
+8/30/24, 10:49 PM - Gabriel: null
+8/30/24, 10:50 PM - Gabriel: null
+8/31/24, 7:25 AM - Nícolas Auersvalt: KKKKK O PEDRO TAVA UM GALÃ
+8/31/24, 7:25 AM - Nícolas Auersvalt: Deve ter sido lendário
+8/31/24, 7:26 AM - Nícolas Auersvalt: Tem que lembrar de fazer a edição dos peaky blinders com os cara
+8/31/24, 7:26 AM - Nícolas Auersvalt: Euler e quem mais?
+8/31/24, 7:36 AM - Nícolas Auersvalt: <Media omitted>
+8/31/24, 1:27 PM - Gabriel: pfto
+8/31/24, 1:27 PM - Gabriel: vou fazer hj
+8/31/24, 1:27 PM - Gabriel: pensei no Euler, Riemman e Gauss. Mas pode botar os físicos tbm, tipo Newton, Laplace, Leibniz,...
+9/2/24, 6:14 PM - Nícolas Auersvalt: Eu tava pensando porque eu conversei com o professor e ele disse que para o Erro da aproximação do polinômio, nós podemos ajustar esse erro aumentando a ordem da série
+9/2/24, 6:14 PM - Nícolas Auersvalt: Tipo da aproximação linear e erro da aproximação do cálculo 1 né, mas aquele não é para várias derivadas
+9/2/24, 6:14 PM - Nícolas Auersvalt: Então caso o usuário peça n=5, o programa calculará o somatório de 0 até 5, garantindo uma maior precisão; Para 19, o somatório começaria em 0 e iria até 19
+9/2/24, 6:14 PM - Nícolas Auersvalt: Dai o que eu pensei, para deixar interessante, o programa pode fazer um automático(for(i=0 até n)) e verificar se conforme esse i cresce, muda muito no valor do erro
+9/2/24, 6:14 PM - Nícolas Auersvalt: Porque se mudar pouco não precisa ir além, já está numa boa precisão
+9/2/24, 6:14 PM - Nícolas Auersvalt: Similar a uma calculadora msm
+9/2/24, 6:14 PM - Nícolas Auersvalt: Porque o professor disse que o seno e o cosseno são séries na forma original, então a ideia é justamente criar uma biblioteca seno e cosseno
+9/2/24, 6:15 PM - Nícolas Auersvalt: Uma classe com método seno e método cosseno
+9/2/24, 6:15 PM - Nícolas Auersvalt: Dai vc chama esses métodos e passa a precisão ou deixa automático
+9/2/24, 6:16 PM - Pedro: É uma boa ideia, para determinado numero de casas de precisão vc admite um número limite de erro
+9/2/24, 6:16 PM - Nícolas Auersvalt: Exato
+9/2/24, 6:17 PM - Nícolas Auersvalt: Vc lembra como é a série do cos?
+9/2/24, 6:17 PM - Nícolas Auersvalt: Ímpares né
+9/2/24, 6:17 PM - Pedro: O cosseno é par
+9/2/24, 6:18 PM - Nícolas Auersvalt: Lembra da fórmula
+9/2/24, 6:18 PM - Nícolas Auersvalt: É somatório de x^2n+1 / (n+1)! ?
+9/2/24, 6:18 PM - Pedro: Acho que é isso msm
+9/2/24, 6:18 PM - Nícolas Auersvalt: Ônibus n para de tremer aqui
+9/2/24, 6:18 PM - Nícolas Auersvalt: Ent
+9/2/24, 6:19 PM - Nícolas Auersvalt: Dá pra computar isso eu acho
+9/2/24, 6:19 PM - Nícolas Auersvalt: Vai ser um O(n) pro fatorial
+9/2/24, 6:19 PM - Nícolas Auersvalt: Dai usa uma memorização, reduz para o(nlogn)
+9/2/24, 6:20 PM - Nícolas Auersvalt: Na vdd não, fica o(n) msm
+9/2/24, 6:20 PM - Pedro: Essa é a do seno
+9/2/24, 6:20 PM - Pedro: Bah, nem lembri
+9/2/24, 6:21 PM - Pedro: Ai me perdi
+9/2/24, 6:34 PM - Gabriel: ah ta
+9/2/24, 6:34 PM - Gabriel: man
+9/2/24, 6:34 PM - Gabriel: me falem... de onde vem essa série?
+9/2/24, 6:34 PM - Gabriel: e isso eh calc 1
+9/2/24, 6:34 PM - Gabriel: só derivar várias vezes <This message was edited>
+9/2/24, 6:57 PM - Nícolas Auersvalt: Já mando o pdf
+9/4/24, 9:36 PM - Nícolas Auersvalt: O gabriel, passa o seu github aí
+9/4/24, 9:38 PM - Gabriel: pia, nem lembro
+9/4/24, 9:38 PM - Gabriel: serve o gmail?
+9/4/24, 9:39 PM - Gabriel: trevisani@ o bagulho da universidade
+9/4/24, 9:39 PM - Nícolas Auersvalt: nos siga lá que dai nas férias eu crio um rep pros testes
+9/4/24, 9:40 PM - Gabriel: blzz
+9/4/24, 9:40 PM - Gabriel: to na smart
+9/4/24, 9:40 PM - Nícolas Auersvalt: pois o replit está limitando a criação de novos replit para o premium
+9/4/24, 9:40 PM - Gabriel: chegando em casa eu vejo certinho
+9/6/24, 2:26 PM - Nícolas Auersvalt: <Media omitted>
+9/6/24, 2:26 PM - Nícolas Auersvalt: <Media omitted>
+9/6/24, 2:28 PM - You changed the group description
+9/6/24, 6:59 PM - Nícolas Auersvalt: Como que se escreve uma tetração? Tipo, x^2 é x², mas e pra tetração ²x? Seria ^2 x?
+9/6/24, 7:03 PM - Gabriel: llkkkkkk oq q eh isso, viado?
+9/6/24, 7:04 PM - Gabriel: ah ta
+9/6/24, 7:04 PM - Gabriel: agr carregou o link do vídeo
+9/9/24, 2:51 PM - Gabriel: <Media omitted>
+9/9/24, 2:51 PM - Gabriel: @554192064755 deu boa?
+9/9/24, 3:01 PM - Nícolas Auersvalt: Deu
+9/9/24, 3:01 PM - Nícolas Auersvalt: Agora a sub amanhã
+9/9/24, 4:50 PM - Gabriel: pra ir se preparando pra curcuitos
+9/9/24, 4:50 PM - Gabriel: <Media omitted>
+9/9/24, 4:50 PM - Gabriel: <Media omitted>
+9/9/24, 4:52 PM - Gabriel: <Media omitted>
+9/9/24, 5:42 PM - Nícolas Auersvalt: tem o de física 2 aí?
+9/9/24, 6:19 PM - Pedro: <Media omitted>
+9/9/24, 10:50 PM - Gabriel: rapazeada, vou fazer a nova ft de perfil
+9/9/24, 11:08 PM - Gabriel deleted this group's icon
+9/9/24, 11:14 PM - Gabriel: to tentando, pera kkkkk
+9/9/24, 11:13 PM - Gabriel changed this group's icon
+9/9/24, 11:21 PM - Gabriel deleted this group's icon
+9/9/24, 11:21 PM - Gabriel changed this group's icon
+9/9/24, 11:21 PM - Gabriel: foi
+9/9/24, 11:22 PM - Gabriel: escolhi o cientista que melhor representa cada um de nós
+9/9/24, 11:23 PM - Gabriel: Euler = eu pq gosta de física, matemática e adora demonstrar as coisas
+Turing = Nicolas pq o homem eh chegado numa programação
+Oppenheimer = nascimento pq os dois são sigma
+9/10/24, 8:18 AM - Pedro: Kk sabia q vc ia escolher o Euler
+9/10/24, 1:13 PM - Nícolas Auersvalt: 21:30 simulado hj
+9/10/24, 1:16 PM - Gabriel: bora
+9/10/24, 1:16 PM - Gabriel: batsy, quero te ver com sangue no olho
+9/10/24, 1:22 PM - Pedro: 🦇👍
+9/10/24, 8:25 PM - Gabriel: rapazeada, atrasou 30 min minha fisioterapia
+9/10/24, 8:25 PM - Gabriel: vou entrar 22h
+9/10/24, 8:47 PM - Pedro: blz
+9/10/24, 10:11 PM - Gabriel: rapazeada, kd o link do disc?
+9/10/24, 10:11 PM - Nícolas Auersvalt: tá on?
+9/10/24, 10:12 PM - Gabriel: o pai ta on crlh
+9/10/24, 10:12 PM - Nícolas Auersvalt: <Media omitted>
+9/10/24, 10:12 PM - Nícolas Auersvalt: esse/
+9/10/24, 10:12 PM - Gabriel: isso
+9/10/24, 11:17 PM - Nícolas Auersvalt: mande as fotos para eu editar dps
+9/10/24, 11:18 PM - Gabriel: <Media omitted>
+9/17/24, 9:37 PM - Nícolas Auersvalt: <Media omitted>
+9/17/24, 9:37 PM - Nícolas Auersvalt: <Media omitted>
+9/17/24, 9:37 PM - Nícolas Auersvalt: <Media omitted>
+9/20/24, 7:17 PM - Gabriel: resumao de C + estrutura de dados
+9/20/24, 7:17 PM - Gabriel: tava na bibliografia da Leyza
+9/20/24, 7:18 PM - Gabriel: livro geralzão de algoritmos (toda universidade usa sapoha)
+9/20/24, 7:18 PM - Gabriel: os 3 tao na bibliografia da leyza
+9/20/24, 7:19 PM - Gabriel: tao carregando
+9/20/24, 7:20 PM - Gabriel: <Media omitted>
+9/20/24, 7:23 PM - Gabriel: <Media omitted>
+9/20/24, 7:29 PM - Gabriel: <Media omitted>
+9/20/24, 9:57 PM - Nícolas Auersvalt: Esse é bão
+9/21/24, 6:09 PM - Gabriel: <Media omitted>
+9/21/24, 6:09 PM - Gabriel: <Media omitted>
+9/21/24, 6:10 PM - Gabriel: esboço de uma calculadora de polinomio
+9/21/24, 6:11 PM - Gabriel: recebe um char como "x - 2*x^3" e faz op. sobre ele
+9/21/24, 6:12 PM - Gabriel: apro linear (deriva), integra (primitiva), raiz e da o valor baseado em x (tp p(1) = -1) <This message was edited>
+9/21/24, 6:12 PM - Nícolas Auersvalt: vc fez no laboratorio, no replit?
+9/21/24, 6:13 PM - Gabriel: fiz no terminal pra treinar
+9/21/24, 6:14 PM - Gabriel: o desafio é converter o char em um vetor int
+9/21/24, 6:15 PM - Gabriel: é fácil se considerar que o coeficiente ta à esquerda de x (antes do *) e o expoente à direita de x (depois do ^)
+9/21/24, 6:15 PM - Gabriel: mas preciso mudar pra procurar pelo sinal e não por x. Facilita o vetor s de sinais e eu preciso de um jeito de achar o termo constante
+9/21/24, 6:16 PM - Gabriel: se vc botar "x", o programa sabe que é coeficiente 1 e expoente 1
+9/21/24, 6:16 PM - Gabriel: quando a função que cria o vetor int a partir do char estiver pronta, fica fácil
+9/21/24, 6:17 PM - Gabriel: a integral e a derivada é chupeta
+9/21/24, 6:17 PM - Gabriel: calcular P(x) mais ainda
+9/21/24, 6:17 PM - Gabriel: as raízes vai ser o maior desafio
+9/21/24, 6:17 PM - Gabriel: o que eu mandei é um esboço
+9/21/24, 6:18 PM - Gabriel: nem botei alocação dinâmica ainda
+9/21/24, 6:19 PM - Gabriel: outro problema são os coeficientes maiores que 9
+9/21/24, 6:19 PM - Gabriel: 10 em char é 1 e 0
+9/21/24, 6:20 PM - Gabriel: então teria que identificar isso e botar (p[i]-'0')*10+(p[i+1]-'0')
+9/21/24, 6:20 PM - Gabriel: etc
+9/21/24, 8:11 PM - Nícolas Auersvalt: Seria interessante deixar tudo global pra não precisar ficar passando por ref
+9/21/24, 8:11 PM - Nícolas Auersvalt: Esse N é o tamanho da string de polinômio?
+9/21/24, 8:22 PM - Nícolas Auersvalt: <Media omitted>
+9/21/24, 8:23 PM - Nícolas Auersvalt: vc iria curtir fazer em c++ esse código, confie em mim
+9/21/24, 8:23 PM - Nícolas Auersvalt: por exemplo, para pegar uma string
+9/21/24, 8:23 PM - Nícolas Auersvalt: 1. string polinomio;
+2. getline(cin, polinomio);
+9/21/24, 8:24 PM - Nícolas Auersvalt: dai você já tem pronto o polinomio.size e várias outras funções para string
+9/21/24, 8:24 PM - Nícolas Auersvalt: pode colocar em stack facinho
+9/21/24, 8:28 PM - Nícolas Auersvalt: stack<int> valores
+9/21/24, 8:28 PM - Nícolas Auersvalt: e você pega rápido o jeito, eu te mando uns arquivos com métodos de cad
+9/21/24, 8:28 PM - Nícolas Auersvalt: você está lá no replit de laboratório?
+9/21/24, 8:28 PM - Nícolas Auersvalt: Pedro, mande o replit aqui no gp
+9/21/24, 8:29 PM - Nícolas Auersvalt: ah, já está aqui
+9/21/24, 9:09 PM - Gabriel: cara, eu vou fazer sim. Agradeço a sugestão
+9/21/24, 9:09 PM - Gabriel: vou usar esse projeto pra desenferrujar do C
+9/21/24, 9:10 PM - Gabriel: vc viu o nível dos enjambres
+9/21/24, 9:10 PM - Gabriel: passar por ref e tal
+9/21/24, 9:10 PM - Gabriel: eu pensei em percorrer p uma vez pra localizar o maior exp (bem fácil). Aí faço alocação dinamica
+9/21/24, 9:10 PM - Gabriel: deria logo dps do scanf
+9/21/24, 9:14 PM - Gabriel: quase... tem que aparecer os sinais "+" ou "-"
+9/21/24, 9:15 PM - Gabriel: vc colcou o ^ e o * com os coeficientes à esquerda?
+9/21/24, 11:20 PM - Nícolas Auersvalt: ah, calmae
+9/21/24, 11:22 PM - Nícolas Auersvalt: <Media omitted>
+9/21/24, 11:22 PM - Nícolas Auersvalt: isso?
+9/21/24, 11:22 PM - Nícolas Auersvalt: dá um exemplo de input para eu colocar aqui
+9/22/24, 12:27 AM - Gabriel: vish, os sinais não tão indo
+9/22/24, 12:28 AM - Gabriel: atualizei
+9/22/24, 12:33 AM - Gabriel: agora só falta acertar uns detalhes
+9/22/24, 12:36 AM - Gabriel: foi
+9/22/24, 12:37 AM - Gabriel: roda com polinomios sem "+" ou "-" (tp P(x) = 5, ou P(x) = x, etc) também
+9/22/24, 12:37 AM - Gabriel: vou mandar aqui
+9/22/24, 12:37 AM - Gabriel: o input é esse mesmo
+9/22/24, 12:38 AM - Gabriel: vamos ver se vai agora
+9/22/24, 12:40 AM - Gabriel: pqp nn ta carregando
+9/22/24, 12:40 AM - Gabriel: <Media omitted>
+9/22/24, 12:40 AM - Gabriel: foi
+9/22/24, 12:40 AM - Gabriel: o make é o mesmo
+9/22/24, 12:50 AM - Nícolas Auersvalt: <Media omitted>
+9/22/24, 1:39 AM - Gabriel: pfto
+9/22/24, 1:39 AM - Gabriel: terminei a função valor, valor float e integral (área entre 2 pontos)
+9/22/24, 1:40 AM - Gabriel: amanhã faço aprox linear. a função valor eh a mais importante nmrl kkkkk
+9/22/24, 1:40 AM - Gabriel: se puder testar até achar erro, agradeço <This message was edited>
+9/22/24, 2:01 AM - Gabriel: po, eh uma boa mesmo
+9/22/24, 2:01 AM - Nícolas Auersvalt: vou dar uma lida
+9/22/24, 2:01 AM - Gabriel: acabando o aprox linear, eu subo no replit
+9/22/24, 2:02 AM - Gabriel: quero usar a função aprox linear e valor_float pra calcular raízes com o método de Newton
+9/22/24, 2:03 AM - Gabriel: e seria legal achar as raízes da derivada pra poder esboçar a função
+9/22/24, 2:03 AM - Gabriel: marcar os max, min e lim até o infinito <This message was edited>
+9/22/24, 2:05 AM - Nícolas Auersvalt: o quê que você vai passar para a função deriva?
+9/22/24, 2:05 AM - Nícolas Auersvalt: uma string?
+9/22/24, 2:24 AM - Gabriel: o vetor int v
+9/22/24, 2:24 AM - Gabriel: ela vai ser a aprox linear na real, tenho que mudar o nome
+9/22/24, 2:26 AM - Gabriel: ai crio um vetor float d tal que
+9/22/24, 2:26 AM - Gabriel: ai dou mais 2 pontos, float a e b
+9/22/24, 2:28 AM - Gabriel: a aprox vai ser:
+9/22/24, 1:51 PM - Gabriel: na parte das raízes da pra usar busca e ordenação (percorre pontos isolados de N em N, pra um N qualquer, olhando o valor de p e p sinal da derivada)
+9/22/24, 1:52 PM - Gabriel: quero criar uma struct polinomio também. Vai ter um vetor char que recebe o input, um vetor float com os coeficientes e um vetor char de sinal <This message was edited>
+9/22/24, 1:53 PM - Gabriel: e também quero fazer um loop do sinal até o * pra poder ter coeficientes maiored
+9/23/24, 12:01 PM - Nícolas Auersvalt: Vc colocou no replit?
+9/23/24, 12:13 PM - Gabriel: vou subir agora
+9/23/24, 12:13 PM - Gabriel: mas não deu pra mexer
+9/23/24, 12:13 PM - Gabriel: <Media omitted>
+9/23/24, 12:13 PM - Gabriel: <Media omitted>
+9/23/24, 12:14 PM - Gabriel: estava ocupado com isso
+9/23/24, 12:16 PM - Gabriel: <Media omitted>
+9/23/24, 12:16 PM - Nícolas Auersvalt: PQP
+9/23/24, 12:17 PM - Nícolas Auersvalt: mas vc tá bem?
+9/23/24, 12:17 PM - Gabriel: <Media omitted>
+9/23/24, 12:17 PM - Nícolas Auersvalt: caralho que bosta
+9/23/24, 12:17 PM - Gabriel: não me deixa subir
+9/23/24, 12:17 PM - Gabriel: fui na farmácia comprar camisinha. minha namorada ficou no carro. bateram. ninguém ficou com um arranhão
+9/23/24, 12:18 PM - Gabriel: então tudo certo
+9/23/24, 12:19 PM - Gabriel: @554192064755 , vc consegue alterar o bagulho pra não ter que passar por ref? eu não lembro/sei como faz
+9/23/24, 12:20 PM - Nícolas Auersvalt: graças a Deus, imagina acontecer isso antes de voltar as aulas
+9/23/24, 12:20 PM - Nícolas Auersvalt: vou upar o arquivo no replit primeiro
+9/23/24, 12:20 PM - Nícolas Auersvalt: esse né?
+9/23/24, 12:21 PM - Gabriel: isso
+9/23/24, 12:22 PM - Nícolas Auersvalt: qual vetor você quer passar por ref para qual função?
+9/23/24, 12:23 PM - Nícolas Auersvalt: o da aproximação?
+9/23/24, 12:24 PM - Gabriel: Todas as funções que eu fiz passam por ref. Vc falou que da pra declarar globalmente e evitar isso
+9/23/24, 12:24 PM - Nícolas Auersvalt: ah blz, vou ver isso
+9/23/24, 12:24 PM - Nícolas Auersvalt: tem um polinômio para eu testar antes?
+9/23/24, 12:24 PM - Gabriel: monstro
+9/23/24, 12:24 PM - Nícolas Auersvalt: 2x né
+9/23/24, 12:24 PM - Nícolas Auersvalt: 2x^2
+9/23/24, 12:24 PM - Gabriel: cara, o que vc quiser
+9/23/24, 12:24 PM - Gabriel: 2-3*x^2+x
+9/23/24, 12:24 PM - Gabriel: só tascar ali
+9/23/24, 12:26 PM - Nícolas Auersvalt: <Media omitted>
+9/23/24, 12:27 PM - Gabriel: vc botou esse que eu falei?
+9/23/24, 12:27 PM - Gabriel: ele integrou
+9/23/24, 12:27 PM - Gabriel: de 1 a 2
+9/23/24, 12:28 PM - Gabriel: <Media omitted>
+9/23/24, 12:29 PM - Gabriel: <Media omitted>
+9/23/24, 12:29 PM - Gabriel: se quiser que ele só mostre o polinomio do vetor, comenta a parte da integral e descomenta a comentada
+9/23/24, 12:29 PM - Nícolas Auersvalt: <Media omitted>
+9/23/24, 12:30 PM - Nícolas Auersvalt: eu tô compilando esse código em c++ porque só estou importando bibliotecas de C, então não muda nada
+9/23/24, 12:30 PM - Gabriel: <Media omitted>
+9/23/24, 12:30 PM - Gabriel: ah ok
+9/23/24, 12:30 PM - Gabriel: como que funciona mesmo?
+9/23/24, 12:31 PM - Nícolas Auersvalt: o tamanho fixo que você colocou para esse vetor é 10, então não pode colocar mais elementos nele
+9/23/24, 12:31 PM - Nícolas Auersvalt: eu imagino que sejam 10 coeficientes
+9/23/24, 12:31 PM - Gabriel: isso
+9/23/24, 12:32 PM - Nícolas Auersvalt: dai vc passa o N para as outras funções
+9/23/24, 12:32 PM - Nícolas Auersvalt: mas poderia só chamar vetor.size() nas partes que precisam do tamanho dele, dai que tem essa função lá
+9/23/24, 12:32 PM - Nícolas Auersvalt: vou dar uma alterada dai vc vê
+9/23/24, 12:45 PM - Pedro: Krl, ainda bem q n deu nada
+9/23/24, 1:33 PM - Gabriel: sim 🙏
+9/23/24, 1:53 PM - Nícolas Auersvalt: pronto
+9/23/24, 1:53 PM - Nícolas Auersvalt: deixei tudo global
+9/23/24, 1:53 PM - Nícolas Auersvalt: tá lá no replit
+9/23/24, 1:53 PM - Nícolas Auersvalt: dai se quiser trocar de N para .size, tá lá a função
+9/23/24, 1:53 PM - Gabriel: assim que fechar meu turno no trampo eu vejo
+9/23/24, 1:53 PM - Gabriel: brabissimo
+9/23/24, 1:56 PM - Nícolas Auersvalt: @554299885087, faz um rep no github e dá git nesse repositório do replit
+9/23/24, 1:57 PM - Nícolas Auersvalt: dps a gnt da fork lá
+9/23/24, 2:19 PM - You changed this group's icon
+9/23/24, 2:23 PM - Gabriel: KKKKKKKKK show
+9/23/24, 2:23 PM - Gabriel: o cara do meio eu o euler mesmo??
+9/23/24, 2:23 PM - Nícolas Auersvalt: por IA
+9/23/24, 2:23 PM - Gabriel: ahh ok
+9/23/24, 2:24 PM - Gabriel: rapzeada
+9/23/24, 2:24 PM - Gabriel: tava pensando em chamar o guilherme pro grupo
+9/23/24, 2:24 PM - Gabriel: o @554299885087 conhece
+9/23/24, 2:24 PM - Gabriel: o cara que fez fis exp com a gente
+9/23/24, 2:24 PM - Gabriel: o @554299885087 não fazia quase nd esse arrombado
+9/23/24, 2:25 PM - Gabriel: eu carreguei o grupo nos primeiros 3 rel. e o guilherme nos últimos 4
+9/23/24, 2:25 PM - Gabriel: o que vcs acham?
+9/23/24, 2:27 PM - Nícolas Auersvalt: guilherme do q?
+9/23/24, 2:27 PM - Gabriel: eng comp tbm
+9/23/24, 2:27 PM - Nícolas Auersvalt: o sobrenome dele
+9/23/24, 2:27 PM - Gabriel: fez ED1 cm a gente
+9/23/24, 2:27 PM - Gabriel: não sei
+9/23/24, 2:27 PM - Gabriel: pera
+9/23/24, 2:28 PM - Gabriel: guilherme de souza carneiro garcia
+9/23/24, 2:28 PM - Nícolas Auersvalt: claro, faz tempo que eu não falo com ele
+9/23/24, 2:28 PM - Nícolas Auersvalt: piá sumiu
+9/23/24, 2:28 PM - Gabriel: blz
+9/23/24, 2:28 PM - Gabriel: sim kkkkk
+9/23/24, 2:28 PM - Gabriel: gostaria de saber oq o batsy ta fazendo agr ao inves de falar com a gente
+9/23/24, 2:47 PM - Nícolas Auersvalt: Chamou o Guilherme?
+9/23/24, 2:48 PM - Gabriel: esperando o ok do batsy
+9/23/24, 2:48 PM - Nícolas Auersvalt: Daí tem que apresentar essa sua calculadora pra ele
+9/23/24, 2:48 PM - Gabriel: sim, eu vou
+9/23/24, 2:48 PM - Nícolas Auersvalt: Quem q é batsy?
+9/23/24, 2:48 PM - Gabriel: mas será a versão com structs
+9/23/24, 2:48 PM - Gabriel: o apelido do pedro é batman
+9/23/24, 2:48 PM - Gabriel: o coringa chama o batman de batsy em algumas histórias
+9/23/24, 2:49 PM - Nícolas Auersvalt: pedro pedrão pedrola batman batsy
+9/23/24, 2:49 PM - Gabriel: 😎
+9/23/24, 2:49 PM - Gabriel: isso
+9/23/24, 3:04 PM - Pedro: Ah de boa
+9/23/24, 3:34 PM - Gabriel: <Media omitted>
+9/23/24, 3:34 PM - Gabriel: <Media omitted>
+9/23/24, 4:07 PM - Nícolas Auersvalt: Chamou ele, eu e o pedro de vagabundos discretamente
+9/23/24, 4:07 PM - Nícolas Auersvalt: O gabriel, vc vai pegar optativa?
+9/23/24, 4:07 PM - Gabriel: KKKKKKK nd a ver po
+9/23/24, 4:08 PM - Nícolas Auersvalt: Eu e o pedro vamos pegar Desenho Técnico na quinta
+9/23/24, 4:08 PM - Nícolas Auersvalt: É a única desse código, dai no quinto período tem o desenho técnico aplicado eu acho
+9/23/24, 4:14 PM - Gabriel: saquei, saquei
+9/23/24, 4:15 PM - Gabriel: me falem dai qual a boa
+9/23/24, 4:15 PM - Gabriel: null
+9/23/24, 4:16 PM - Gabriel: chegando em casa eu vou varar o dia nos polinomios
+9/23/24, 4:16 PM - Nícolas Auersvalt: <Media omitted>
+9/23/24, 4:16 PM - Nícolas Auersvalt: Nice
+9/23/24, 4:19 PM - Gabriel: e o  4° período que não tem uma fucking matéria de prog
+9/23/24, 4:19 PM - Gabriel: pqp
+9/23/24, 4:20 PM - Nícolas Auersvalt: tava falando com o pedro ontem, essa de analise de sistemas lineares é quase uma álgebra linear
+9/23/24, 4:20 PM - Gabriel: então, foi oq eu pensei
+9/23/24, 4:20 PM - Gabriel: falou com quem?
+9/23/24, 4:21 PM - Nícolas Auersvalt: <Media omitted>
+9/23/24, 4:22 PM - Gabriel: sim, vê em EDO
+9/23/24, 4:22 PM - Gabriel: essa transformada Z ta com cara de ser complexo, não?
+9/23/24, 4:23 PM - Nícolas Auersvalt: então esse quarto período vai ser direcionado quase totalmente para eletrônica
+9/23/24, 4:23 PM - Gabriel: pse
+9/23/24, 4:23 PM - Gabriel: foi a impressão que deu
+9/23/24, 4:23 PM - Nícolas Auersvalt: pq no microcontrolador a gnt usa a função map para converter os sinais analógicos para digitais
+9/23/24, 4:23 PM - Nícolas Auersvalt: mas p eletrônica, tem que fazer filtro com base nessa transformada
+9/23/24, 4:24 PM - Gabriel: ahh saquei
+9/23/24, 5:38 PM - Gabriel added Guilherme
+9/23/24, 5:38 PM - Gabriel: bem vindo à tropa dos nerdola
+9/23/24, 5:41 PM - Guilherme: Espero representar o nome do grupo 🫡
+9/23/24, 5:49 PM - Nícolas Auersvalt: Salve Guilherme
+9/23/24, 6:03 PM - Guilherme: Salve, como tá as férias até agora?
+9/23/24, 6:12 PM - Nícolas Auersvalt: Mt produtiva, no grupo estamos vendo uma calculadora de algumas operações matemáticas como derivação e integração
+9/23/24, 6:13 PM - Nícolas Auersvalt: E tb algebra linear aplicada à computação tb
+9/23/24, 6:13 PM - Nícolas Auersvalt: Para grafos, vamos ver criptografia
+9/23/24, 6:13 PM - Guilherme: Boa
+9/23/24, 6:13 PM - Nícolas Auersvalt: E aplicada a computação gráfica
+9/23/24, 6:13 PM - Nícolas Auersvalt: Ent a gnt manda algumas coisas aqui no grupo sobre isso
+9/23/24, 6:14 PM - Nícolas Auersvalt: Replit do laboratório
+9/23/24, 6:15 PM - Guilherme: Entendi, eu tô meio parado por causa da greve então vou ter que voltar as trilhos agora, espero não atrapalhar a interação aqui 🙃
+9/23/24, 6:15 PM - Nícolas Auersvalt: Qualquer coisa entra call discord um dia, sempre vamos call pra estudar e discutir algumas coisas
+9/23/24, 6:16 PM - Nícolas Auersvalt: O gabriel traz muita coisa de física e matemática, o pedro física e matemática tb, eu mais prog competitivo e matemática
+9/23/24, 6:16 PM - Guilherme: Show 🫡, vou precisar, principalmente pra programação, acho que é a área que estou pior no momento, por mais que tenha ido bem em estrutura de dados, sinto que não sai da disciplina satisfeito
+9/23/24, 6:21 PM - Nícolas Auersvalt: Este ano vc vai participar da UTFdx?
+9/23/24, 6:21 PM - Guilherme: Acho que não, não vejo interesse na competição
+9/23/24, 6:22 PM - Guilherme: E vc?
+9/23/24, 6:23 PM - Nícolas Auersvalt: Tô tentando convencer o @554299885087
+9/23/24, 6:23 PM - Nícolas Auersvalt: E faz um tempão já de ED
+9/23/24, 6:23 PM - Nícolas Auersvalt: Vai pegar tec prog?
+9/23/24, 6:24 PM - Guilherme: Vou
+9/23/24, 6:24 PM - Nícolas Auersvalt: Nice, Simão?
+9/23/24, 6:24 PM - Guilherme: Não, o Borsato, na turma de quarta, e você?
+9/23/24, 6:25 PM - Nícolas Auersvalt: Simão, virar game developer este semestre
+9/23/24, 6:25 PM - Guilherme: Boa
+9/23/24, 6:27 PM - Guilherme: Eu conversei com um amigo meu que fez física 2, e fez com o Simão, e explicou como foi a experiencia dele, mas acabei por escolher o outro professor
+9/23/24, 6:34 PM - Nícolas Auersvalt: o kit saúde mental é barreto e simão
+9/23/24, 6:37 PM - Guilherme: vdd, além da formação profissional você sai louco, talvez seja requisito para o mercado de trabalho
+9/23/24, 6:42 PM - Nícolas Auersvalt: um negócio que eu tô fazendo desde que entrei no curso é tipo, todo trabalho ou projeto feito, eu coloco no portfólio pessoal e github
+9/23/24, 6:42 PM - Nícolas Auersvalt: vale super a pena
+9/23/24, 6:42 PM - Nícolas Auersvalt: tu tem github?
+9/23/24, 6:43 PM - Guilherme: eu ate tenho uma conta só que não aprendi a usar
+9/23/24, 6:45 PM - Nícolas Auersvalt: o dia que vc começar a usar dai mande aí que a gente te segue lá
+9/23/24, 6:45 PM - Guilherme: blz, a gente vai conversando no semestre tbm, tenho que aprender bastante coisa ainda
+9/23/24, 7:58 PM - Gabriel: KKKKKKKKKK
+9/23/24, 7:58 PM - Gabriel: rapazeada, refiz todo o código usando structs
+9/23/24, 7:59 PM - Nícolas Auersvalt: por quê?
+9/23/24, 7:59 PM - Gabriel: ele pega o char, cria um vetor de int e um de char pros sinais, e dai printa de volta pra ver se o polinomio ta certo
+9/23/24, 7:59 PM - Gabriel: pra relembrar sapoha kkkk
+9/23/24, 7:59 PM - Gabriel: e ficou muito melhor
+9/23/24, 7:59 PM - Gabriel: vou mandar aqui
+9/23/24, 8:00 PM - Gabriel: <Media omitted>
+9/23/24, 8:00 PM - Gabriel: <Media omitted>
+9/23/24, 8:00 PM - Gabriel: <Media omitted>
+9/23/24, 8:00 PM - Gabriel: <Media omitted>
+9/23/24, 8:00 PM - Gabriel: tem o make, o header e o com as funções. Aí tem o projeto em si, que é o executável <This message was edited>
+9/23/24, 8:03 PM - Gabriel: agora vou botar as funções de integração
+9/23/24, 8:03 PM - Gabriel: e de valor
+9/23/24, 8:03 PM - Nícolas Auersvalt: acho que só vou ver o código amanhã ou sexta, to vendo uns métodos de debugging no vim e vou ver árvores avl e rubro negro
+9/23/24, 8:04 PM - Gabriel: dboas
+9/23/24, 8:41 PM - Nícolas Auersvalt: se liga nesse método de compilação, dá para fazer no vim no :split ou :terminal
+9/23/24, 8:41 PM - Nícolas Auersvalt: compilação não, debugging
+9/23/24, 9:20 PM - Gabriel: opa, vou dar uma olhada amn
+9/23/24, 9:21 PM - Gabriel: to sem net aqui em casa e o 4g ta pior que o corinthians
+9/23/24, 9:33 PM - Guilherme: Sua internet é da vivo? Aqui em casa tá sem internet Aqui
+9/23/24, 9:34 PM - Gabriel: é que eu não tenho kkkkk
+9/23/24, 9:34 PM - Gabriel: to morando sozinho na casa que era da minha avó
+9/23/24, 9:34 PM - Gabriel: pagando o  iptu como se fosse aluguel
+9/23/24, 9:35 PM - Guilherme: Porra, mals não sabia, foda
+9/23/24, 9:35 PM - Gabriel: ah eu to curtindo. só a net que é paia
+9/23/24, 9:35 PM - Gabriel: tava sempre sem grana pq tinha que pagar coisa do carro
+9/23/24, 9:35 PM - Gabriel: pelo lado bom, talvez sobre um pouco agora
+9/23/24, 10:04 PM - Nícolas Auersvalt: <Media omitted>
+9/23/24, 10:04 PM - Nícolas Auersvalt: o pedro, baixa o laboratório
+9/23/24, 10:04 PM - Nícolas Auersvalt: vamos mudar de plataforma
+9/23/24, 10:04 PM - Gabriel: KKKKKKKK
+9/23/24, 10:05 PM - Gabriel: momento alpha boss do @554192064755
+9/23/24, 10:06 PM - Nícolas Auersvalt: pqp, dps que colocaram IA no replit começaram a cobrar tudo, dai ficou horrível
+9/23/24, 10:06 PM - Nícolas Auersvalt: @554299885087 já usou o GitHub CodeSpaces?
+9/23/24, 10:09 PM - Pedro: Nunca usei
+9/23/24, 10:09 PM - Nícolas Auersvalt: eu to curtindo, veja o plano free
+9/23/24, 10:09 PM - Nícolas Auersvalt: se ele é bom
+9/23/24, 10:12 PM - Nícolas Auersvalt: ele tem o VIM, GNU e python 3 já no terminal
+9/23/24, 10:13 PM - Nícolas Auersvalt: muito foda
+9/23/24, 10:17 PM - Pedro: dá para compartilhar será?
+9/23/24, 10:17 PM - Nícolas Auersvalt: deve ter plugin, mas dá pra trabalhar em conjunto
+9/23/24, 10:18 PM - Nícolas Auersvalt: mas dai é git commit e git push o tempo todo, o famoso workflow no pelo
+9/23/24, 10:19 PM - Pedro: não tem a parte colaborativa do replit ent
+9/23/24, 10:19 PM - Pedro: mas é até bom assim
+9/23/24, 10:19 PM - Pedro: vc tem o repositório aí é só alterar ele né
+9/23/24, 10:20 PM - Nícolas Auersvalt: é bom o cacete, no replit a gnt altera o código em conjunto e em tempo real, eu vou ver se acho algum plugin
+9/23/24, 10:20 PM - Nícolas Auersvalt: se não estamos ferrados com o Laboratorio
+9/23/24, 10:21 PM - Pedro: se um faz merda em tempo real, todo mundo se ferra
+9/23/24, 10:21 PM - Nícolas Auersvalt: nada, tinha o histórico
+9/23/24, 10:21 PM - Nícolas Auersvalt: veja aí se vc consegue criar um codespace
+9/23/24, 10:21 PM - Nícolas Auersvalt: no do laboratorio
+9/23/24, 10:21 PM - Pedro: tem como acessar isso?
+9/23/24, 10:22 PM - Nícolas Auersvalt: nn, isso é um codespace, é tipo um computador seu
+9/23/24, 10:22 PM - Nícolas Auersvalt: to vendo o Live Share
+9/23/24, 10:22 PM - Nícolas Auersvalt: ele tá cobrando algo de vc?
+9/23/24, 10:22 PM - Pedro: não
+9/23/24, 10:22 PM - Nícolas Auersvalt: o seu github é o Pro?
+9/23/24, 10:23 PM - Pedro: não <This message was edited>
+9/23/24, 10:24 PM - Nícolas Auersvalt: <Media omitted>
+9/23/24, 10:25 PM - Nícolas Auersvalt: primeiro, baixe a extensão Live Share aí no seu codespace
+9/23/24, 10:25 PM - Nícolas Auersvalt: dai dps ele aparece um ícone na lateral esquerda, do live share, então abra esse link e veja se tu consegue acessar o meu repositório
+9/23/24, 10:26 PM - Nícolas Auersvalt: deu?
+9/23/24, 10:26 PM - Pedro: ta aguardando vc aprovar
+9/23/24, 10:26 PM - Nícolas Auersvalt: aprovei, vai no rep 2 periodo /Algebra linear / grafo
+9/23/24, 10:27 PM - Nícolas Auersvalt: dai seleciona um texto para ver se aparece pra mim
+9/23/24, 10:28 PM - Pedro: aqui ta somente leitura n posso editar
+9/23/24, 10:29 PM - Nícolas Auersvalt: consigo ver o q vc tá fazendo
+9/23/24, 10:29 PM - Pedro: eu tb
+9/23/24, 10:29 PM - Nícolas Auersvalt: poh, então vamo migrar pro codespace completamente, muito mais profissional e útil tb
+9/23/24, 10:30 PM - Pedro: ah pera
+9/23/24, 10:30 PM - Pedro: acho que vou conseguir
+9/23/24, 10:30 PM - Nícolas Auersvalt: eu tenho q ver como eu mudo a permissão read&write
+9/23/24, 10:31 PM - Nícolas Auersvalt: consegui, tenta criar um arquivo
+9/23/24, 10:33 PM - Pedro: deu
+9/23/24, 10:35 PM - Nícolas Auersvalt: pessoal, deu certo. Então vamos usar o CodeSpace do Github para o laboratório, vou passar o tutorial aí pelo chatgpt
+9/23/24, 10:35 PM - Nícolas Auersvalt: O pedro compartilha com a gnt o codespace do laboratório ou fixa o link na descrição do grupo
+9/23/24, 10:42 PM - Pedro changed the group description
+9/24/24, 9:07 AM - Gabriel: brabissimos os dois
+9/27/24, 11:59 AM - Gabriel: <Media omitted>
+9/27/24, 11:59 AM - Gabriel: This message was deleted
+9/27/24, 11:59 AM - Gabriel: This message was deleted
+9/27/24, 11:59 AM - Gabriel: <Media omitted>
+9/27/24, 12:00 PM - Gabriel: rapazeada, acho que terminei
+9/27/24, 12:00 PM - Gabriel: minto, falta revisar quando o polinomio não tem raiz
+9/27/24, 12:01 PM - Gabriel: mas ele ta acertando de todas as cúbicas (geral) e quadráticas com 2 raízes
+9/27/24, 12:01 PM - Gabriel: falta ver os pares que tem uma só ou nenhuma
+9/27/24, 12:01 PM - Gabriel: ele acha raiz recursivamente. deriva até dar linear e usa as raízes da derivada pra achar as dele com método de newton
+9/27/24, 12:02 PM - Gabriel: aí vai achando as raízes das derivadas até chegar nele
+9/27/24, 12:02 PM - Gabriel: levei 2 dias pra pensar e 2 pra programar kkkkk
+9/27/24, 12:09 PM - Gabriel: vou fazer uma função que diz se o limite tende a +infty ou -infty
+9/27/24, 12:09 PM - Gabriel: só pegar o sinal
+9/27/24, 1:45 PM - Gabriel: <Media omitted>
+9/27/24, 1:45 PM - Gabriel: <Media omitted>
+9/27/24, 1:46 PM - Gabriel: falta só entender porque da erro quando não tem raiz (ex: x^2 + 4)
+9/27/24, 1:46 PM - Gabriel: coeficiente tem que ser <= 9 <This message was edited>
+9/27/24, 10:50 PM - Nícolas Auersvalt: alguém quer ir call para ver Computação Gráfica com transformações lineares?
+9/27/24, 10:50 PM - Nícolas Auersvalt: vou usar python para tal pois é melhor para visualização gráfica
+9/27/24, 11:02 PM - Guilherme: Valeu pelo convite Nícolas, só que agora eu não tô com acesso ao computador
+9/27/24, 11:02 PM - Nícolas Auersvalt: capaz, mandarei os resultados do estudo aqui dps
+9/27/24, 11:02 PM - Guilherme: 🙏
+9/27/24, 11:03 PM - Guilherme: Além do mais, eu vou estar mega descolado do que você está fazendo, a gente precisa conversar na próxima semana
+9/27/24, 11:04 PM - Nícolas Auersvalt: tentando achar usos da álgebra linear no dia a dia, mas tá dando boa
+9/27/24, 11:04 PM - Nícolas Auersvalt: tem o do grafo, vc sabe grafos?
+9/27/24, 11:04 PM - Guilherme: Não
+9/27/24, 11:04 PM - Nícolas Auersvalt: dijkstra essas coisas
+9/27/24, 11:04 PM - Nícolas Auersvalt: ou BFS e DFS
+9/27/24, 11:04 PM - Nícolas Auersvalt: tipo
+9/27/24, 11:04 PM - Nícolas Auersvalt: fazer assim, pessoalmente eu te explico melhor daí
+9/27/24, 11:05 PM - Guilherme: Blz, você vai pra disciplina da oficina?
+9/27/24, 11:05 PM - Nícolas Auersvalt: quê?
+9/27/24, 11:06 PM - Nícolas Auersvalt: oficinas 1?
+9/27/24, 11:06 PM - Guilherme: Isso
+9/27/24, 11:06 PM - Nícolas Auersvalt: falta um pro nosso grupo
+9/27/24, 11:06 PM - Nícolas Auersvalt: vc tem grupo?
+9/27/24, 11:06 PM - Guilherme: Nao tenho, nem sabia que era antes que buscava
+9/27/24, 11:06 PM - Nícolas Auersvalt: com quem vc pegou?
+9/27/24, 11:07 PM - Nícolas Auersvalt: apesar de que juntam as turmas
+9/27/24, 11:07 PM - Guilherme: S71
+9/27/24, 11:07 PM - Guilherme: A turma do curso mesmo
+9/27/24, 11:07 PM - Nícolas Auersvalt: eu peguei S01, eles juntam né
+9/27/24, 11:08 PM - Guilherme: Mas pelo que eu li essas turmas que tem aula junto eles distribuem os alunos nas turmas
+9/27/24, 11:08 PM - Nícolas Auersvalt: o, vc não quer ir comigo e mais uma menina de eng comp?
+9/27/24, 11:08 PM - Nícolas Auersvalt: temos o projeto 30% já
+9/27/24, 11:08 PM - Guilherme: Como que é essa disciplina? É vários projetos? <This message was edited>
+9/27/24, 11:08 PM - Nícolas Auersvalt: uma
+9/27/24, 11:08 PM - Nícolas Auersvalt: um projeto
+9/27/24, 11:09 PM - Nícolas Auersvalt: eu já falei pro pedro, eu tô planejando fazer uma "impressora"
+9/27/24, 11:09 PM - Nícolas Auersvalt: plotter é o nome correto
+9/27/24, 11:09 PM - Nícolas Auersvalt: tipo, vc desenha, dai importa o .bmp pro código, ele transforma numa matriz, joga pro arduino, dai ele começa a desenhar
+9/27/24, 11:09 PM - Nícolas Auersvalt: é super ambicioso
+9/27/24, 11:10 PM - Guilherme: A aula serve para alguma coisa exatamente? Ou só pra gente se reunir mesmo
+9/27/24, 11:10 PM - Nícolas Auersvalt: pesquisas
+9/27/24, 11:10 PM - Nícolas Auersvalt: e pré apresentações
+9/27/24, 11:10 PM - Nícolas Auersvalt: se tu quiser fazer com a gnt, vamo discord amanhã que eu te apresento o projeto
+9/27/24, 11:11 PM - Guilherme: Vamos ver, eu não quero atrapalhar mais do que ajudar, como tinha dito, tava meio parado por causa da greve
+9/27/24, 11:11 PM - Nícolas Auersvalt: blz
+9/27/24, 11:11 PM - Guilherme: Bem intrigante sua ideia posso dizer
+9/27/24, 11:12 PM - Guilherme: Que horas vc gosta de conversar?
+9/27/24, 11:13 PM - Nícolas Auersvalt: pode ser de tarde
+9/27/24, 11:13 PM - Nícolas Auersvalt: tenho que ver a questão da impressão 3d
+9/27/24, 11:14 PM - Nícolas Auersvalt: e decidimos que não vamos usar PCI a não ser que os professores peçam
+9/27/24, 11:14 PM - Nícolas Auersvalt: pq dai teríamos que mandar imprimir na china e mandar pra gnt, demorando mt, ou tendo que usar a da utf
+9/27/24, 11:14 PM - Nícolas Auersvalt: mas o circuito é relativamente simples
+9/27/24, 11:14 PM - Guilherme: Entendi
+9/27/24, 11:15 PM - Guilherme: Se eu não sair de tarde, eu chamo você, claro que não quero ser inconveniente tbm
+9/27/24, 11:16 PM - Nícolas Auersvalt: só manda um zap dai eu entro no disc
+9/27/24, 11:17 PM - Guilherme: Valeu Nícolas, bons estudos 🙏 <This message was edited>
+9/28/24, 12:56 AM - Nícolas Auersvalt: alguém online para testar o programa?
+9/28/24, 1:02 AM - Nícolas Auersvalt: o quê que vocês acham de a gnt criar uma aplicação web como laboratório? Dai a gnt seleciona no menu qual opção a gnt quer
+9/28/24, 1:02 AM - Nícolas Auersvalt: tipo a calculadora do gabriel
+9/28/24, 1:02 AM - Guilherme: Funciona no celular?
+9/28/24, 1:02 AM - Nícolas Auersvalt: é site, funciona
+9/28/24, 1:03 AM - Guilherme: Ok vou tentar ver
+9/28/24, 1:03 AM - Nícolas Auersvalt: só deixe no modo claro, fica melhor
+9/28/24, 1:03 AM - Nícolas Auersvalt: @554299885087, está on no discord?
+9/28/24, 1:04 AM - Nícolas Auersvalt: Teste a Ampliação, a Translação e a Rotação
+9/28/24, 1:04 AM - Guilherme: Funcionou 🫡 , era para mostrar o cubo e girar ele?
+9/28/24, 1:05 AM - Nícolas Auersvalt: tipo, ampliação vc coloca o fator ampliação, tipo 2x, dai coloca 2
+9/28/24, 1:05 AM - Guilherme: Deu certo sim
+9/28/24, 1:05 AM - Nícolas Auersvalt: translação só desliza o negócio
+9/28/24, 1:05 AM - Nícolas Auersvalt: e rotação coloca um ângulo e seleciona o eixo
+9/28/24, 1:05 AM - Nícolas Auersvalt: ah blz
+9/28/24, 1:06 AM - Guilherme: Boa, ficou bem legal
+9/28/24, 1:14 AM - Pedro: Hj não, mas vou conferir esse app amanhã <This message was edited>
+9/28/24, 2:21 AM - Nícolas Auersvalt: ficou mt foda o site
+9/28/24, 2:26 AM - Nícolas Auersvalt: <Media omitted>
+9/28/24, 2:44 AM - Nícolas Auersvalt: pedro, fiz o código dos grafos pra aplicação
+9/28/24, 2:44 AM - Nícolas Auersvalt: vou juntar tudo naquilo la
+9/28/24, 2:45 AM - Nícolas Auersvalt: <Media omitted>
+9/28/24, 3:53 AM - Nícolas Auersvalt: @554299885087 se liga nesse site, dá pra fazer uns grafo bonitão
+9/28/24, 3:53 AM - Nícolas Auersvalt: <Media omitted>
+9/28/24, 4:03 AM - Nícolas Auersvalt: pronto, coloquei a dos grafos tb, ficou mt foda tá
+9/28/24, 4:04 AM - Nícolas Auersvalt: todo o frontend foi feito pelo chatgpt mas fodase tb, é frontend
+9/28/24, 4:04 AM - Nícolas Auersvalt: dai se vcs curtirem a ideia, podemos colocar outras coisas nesse site e tornar ele um laboratório msm
+9/28/24, 4:09 AM - Nícolas Auersvalt: só dá um Fork no rep LambdaLabs, não dá para ser o mesmo do pedro porque esse é de uma aplicação
+9/28/24, 5:04 AM - Gabriel: opa, fala mais
+9/28/24, 5:04 AM - Gabriel: tava querendo estudar comp. gráfica
+9/28/24, 5:05 AM - Gabriel: na parte de elevar, ja tentou fazer um programa que acha auto valor e auto vetor?
+9/28/24, 5:05 AM - Gabriel: aí deixa tudo chupeta
+9/28/24, 5:05 AM - Gabriel: boa
+9/28/24, 5:08 AM - Gabriel: tava querendo ver algum livro do impa sobre, mas ta foda achar
+9/28/24, 5:12 AM - Gabriel: pra rotação em 2D, tem como usar complexos? aí o vetor ja fica e^ti, dado um ângulo t
+9/28/24, 5:12 AM - Gabriel: e em 3D da pra usar quatérnio também
+9/28/24, 5:57 AM - Nícolas Auersvalt: Elevar?
+9/28/24, 5:58 AM - Nícolas Auersvalt: O do grafo?
+E elevo essa matriz até P. Mas elevar até P vai me mostrar quantas cidades possuem P conexões. Dai sim faria sentido usar autovalor e autovetor
+9/28/24, 6:01 AM - Nícolas Auersvalt: Mas eu sei a cidade de destino J e cidade de partida I
+9/28/24, 6:01 AM - Nícolas Auersvalt: N sei se é essa a sua pergunta
+9/28/24, 6:02 AM - Nícolas Auersvalt: Então eu não quero descobrir se há P conexão da cidade I até a cidade J, tipo P=3, há 3 ruas conectando a cidade I até J, P=9, há 9 ruas conectando elas, ou melhor ainda, no percurso de I até J
+9/28/24, 6:04 AM - Nícolas Auersvalt: Eu quero descobrir a qtd mínima de ruas pra partir de I até J, então se eu for elevando essa matriz, na primeira ocorrência de um 1 em Mat[i][j] já quebra tudo, break e fim de loop, pois eu já descobri o percurso mínimo *direcionado*
+9/28/24, 6:04 AM - Nícolas Auersvalt: Se essa foi a pergunta eu sei lá, mas eu só elevo matriz a alguma potência no dos grafo né
+9/28/24, 6:05 AM - Nícolas Auersvalt: Acho que sim, porque vc escreve como polar
+9/28/24, 6:05 AM - Nícolas Auersvalt: Então pode muito bem escrever como uma expressão real-imaginária
+9/28/24, 6:06 AM - Nícolas Auersvalt: Vc faz rotações separadas e faz o produto delas (ambas são matrizes), então dá boa sim
+9/28/24, 6:07 AM - Nícolas Auersvalt: Eu só não sei como vc vai tratar como imaginários, acho que seria decompor conforme as fórmulas de Moivre talvez, mas eu n lembro de bosta nenhuma disso
+9/28/24, 6:08 AM - Nícolas Auersvalt: EU ENTENDI
+9/28/24, 6:09 AM - Nícolas Auersvalt: Se vc escrever no plano de argand gauss e supor que precisa de um rho e de um phi, vc pode não só rotacionar, como também transladar E ampliar
+9/28/24, 6:12 AM - Nícolas Auersvalt: Porque ele vai ser parametrizado como z(rho, phi) = rho * cos(phi) + i * rho * sen(phi)
+9/28/24, 6:15 AM - Nícolas Auersvalt: Então vc pode criar uma matriz de todos os vértices do sólido e tratar cada vértice (x, y, z) como esse complexo na forma do z. Então na hora que vc variar o phi, fará uma rotação em 2d, se variar o rho e o phi, vai ampliar e rotacionar
+9/28/24, 6:16 AM - Nícolas Auersvalt: Isso em XY, então seria a Matriz XY, se multiplicar as matrizes XY, YZ, ZX tu consegue um movimento em R3
+9/28/24, 6:17 AM - Nícolas Auersvalt: Então se vc quiser aplicar uma proporção, tipo elevar ao quadrado ou tirar raíz, consegue aplicar Moivre tranquilo
+9/28/24, 6:18 AM - Nícolas Auersvalt: Seria tipo tirar zoom rapidão do sólido ou dar zoom, ou movimentar ele mais rápido pela tela
+9/28/24, 6:19 AM - Nícolas Auersvalt: Se for isso não seria difícil de fazer, bastaria criar uma matriz XY que pra cada elemento recebe uma função parametrizada e depois variar os parâmetros
+9/28/24, 10:19 AM - Gabriel: hmmm
+9/28/24, 10:21 AM - Gabriel: eh que ali tava escrito que era um método pouco eficiente pra matrizes grandes. Aí pensei no auto valor e auto vetor. Mas entendi o que vc falou, eu tinha pego uma ideia diferente
+9/28/24, 10:22 AM - Gabriel: to pegando a visão
+9/28/24, 10:22 AM - Gabriel: man preciso ler sobre isso nmrl jkkkk
+9/28/24, 10:22 AM - Gabriel: não sei poha nenhuma
+9/28/24, 10:24 AM - Gabriel: ficou top man
+9/28/24, 10:24 AM - Gabriel: muito bom
+9/28/24, 10:25 AM - Gabriel: vou ter que entender o pq matemático disso kkkk
+9/28/24, 12:23 PM - Pedro: Que legal man
+9/28/24, 12:33 PM - Pedro: Qnt informação kk, mas mt massa
+9/28/24, 1:09 PM - Nícolas Auersvalt: Eu achei bom esse capítulo no livro de aplicações, seria um bom começo
+9/28/24, 1:10 PM - Nícolas Auersvalt: Dai que eu tava falando, seria maneiro vc colocar a calculadora numa aplicação web tb
+9/28/24, 11:49 PM - Nícolas Auersvalt: <Media omitted>
+9/28/24, 11:50 PM - Nícolas Auersvalt: vcs curtem prog competitiva? Posso mandar alguns estudos aqui tb
+9/28/24, 11:50 PM - Nícolas Auersvalt: como curiosidade
+9/29/24, 12:29 AM - Gabriel: manda ai
+9/29/24, 2:46 AM - Nícolas Auersvalt: criptografia no jeito
+9/29/24, 2:51 AM - Nícolas Auersvalt: <Media omitted>
+9/29/24, 3:00 AM - Nícolas Auersvalt: O Gabriel, falta a calculadora lá no site, hora que puder colocar me avise que eu vejo pra arrumar o site
+9/29/24, 3:01 AM - Nícolas Auersvalt: por enquanto só tem esses do livro que o pedro passou, qualquer ideia diferente dá pra colocar lá
+9/29/24, 10:01 AM - Gabriel: vou subir la
+9/29/24, 10:01 AM - Gabriel: terminei sexta de tarde
+9/29/24, 10:02 AM - Gabriel: só que to desde sexta de noite até hj de manhã com a minha namorada
+9/29/24, 10:02 AM - Gabriel: acabei de mandar ela de uber pro trampo
+9/29/24, 10:02 AM - Gabriel: resolve qualquer quadrática/cúbica
+9/29/24, 10:03 AM - Gabriel: ta dando erro em alguns polinomios de grau 4 com 4 raízes diferentes. ele acha a mesma 2x na parte do miolo
+9/29/24, 10:03 AM - Gabriel: to terminando também um texto explicando a fundamentação matemática de tudo
+9/29/24, 10:03 AM - Gabriel: vou mandar aqui dai pra quem tiver interesse
+9/29/24, 10:03 AM - Gabriel: uma das sessões explica meu algoritmo
+9/29/24, 10:17 AM - Gabriel: achei o erro
+9/29/24, 10:17 AM - Gabriel: funciona pra qualquer polinomio
+9/29/24, 10:17 AM - Gabriel: mais pra frente eu ponho um loop pra permitir coeficientes maiores que 9
+9/29/24, 10:18 AM - Gabriel: vou subir
+9/29/24, 10:18 AM - Gabriel: como que faz isso? kkkk
+9/29/24, 1:41 PM - Nícolas Auersvalt: Upar no git?
+9/29/24, 1:41 PM - Gabriel: isso aqui
+9/29/24, 1:42 PM - Nícolas Auersvalt: Ah, é só dar um git clone no repositório do Laboratório e dar git commit e git push
+9/29/24, 1:42 PM - Nícolas Auersvalt: Dai eu aprovo dps
+9/29/24, 1:43 PM - Gabriel: ok
+9/29/24, 1:44 PM - Gabriel: tem que criar isso aqui?
+9/29/24, 1:48 PM - Nícolas Auersvalt: Nn
+9/29/24, 1:48 PM - Nícolas Auersvalt: Faça assim
+9/29/24, 1:48 PM - Nícolas Auersvalt: Upa num repositório seu
+9/29/24, 1:48 PM - Nícolas Auersvalt: Dai manda o link que eu baixo e coloco no laboratório
+9/29/24, 1:49 PM - Nícolas Auersvalt: Daí dps eu vejo pra converter em python e colocar no site
+9/29/24, 2:33 PM - Gabriel: ok
+9/29/24, 2:33 PM - Gabriel: vou fazer isso hoje de tarde
+9/29/24, 7:18 PM - Nícolas Auersvalt: vc tem alguns exemplos de input para eu testar?
+9/29/24, 7:20 PM - Nícolas Auersvalt: dá uma olhada lá no site
+9/29/24, 7:48 PM - Gabriel: ok
+9/29/24, 7:51 PM - Gabriel: só seguir a regra de exp depois de x e coeficiente antes
+9/29/24, 7:51 PM - Gabriel: não precisa fazer 1*, ^0 ou ^1
+9/29/24, 7:52 PM - Gabriel: ele já entende
+9/29/24, 7:53 PM - Gabriel: entrei la no site
+9/29/24, 7:53 PM - Gabriel: não entendi direito. era pra calcular aqueles campos automaticamente, né?
+9/29/24, 7:53 PM - Nícolas Auersvalt: é que eu preciso saber quantos inputs tem e quais os tipos
+9/29/24, 7:53 PM - Nícolas Auersvalt: por exempo, vc vai executar ./polinomios
+9/29/24, 7:54 PM - Nícolas Auersvalt: mas vai usar um arquivo para colocar no buffer em vez de ler entrada de teclado
+9/29/24, 7:54 PM - Nícolas Auersvalt: dai coloca ./polinomios < in
+9/29/24, 7:54 PM - Nícolas Auersvalt: como seria esse arquivo in?
+9/29/24, 7:54 PM - Nícolas Auersvalt: só teria
+9/29/24, 7:54 PM - Gabriel: o input de usuário é só isso. o resto ele calcula sozinho
+9/29/24, 7:55 PM - Gabriel: nunca fiz esse buffer, então tenho que entender melhor
+9/29/24, 7:55 PM - Nícolas Auersvalt: já te explico
+9/29/24, 8:01 PM - Nícolas Auersvalt: <Media omitted>
+9/29/24, 8:02 PM - Nícolas Auersvalt: no arquivo in você coloca tudo o que você digitaria no código
+9/29/24, 8:02 PM - Nícolas Auersvalt: tipo o polinômio
+9/29/24, 8:02 PM - Nícolas Auersvalt: dai executa o arquivo com o < in
+9/29/24, 8:02 PM - Nícolas Auersvalt: e pode armazenar em um arquivo de saida tb
+9/29/24, 8:02 PM - Nícolas Auersvalt: como em:
+9/29/24, 8:03 PM - Nícolas Auersvalt: <Media omitted>
+9/29/24, 8:03 PM - Nícolas Auersvalt: dai para eu testar várias vezes eu precisaria desse input, ou arquivo in
+9/29/24, 8:06 PM - Nícolas Auersvalt: seria interessante vc colocar no alvo de compilação do makefile a flag -Wall para exibir possíveis erros e falhas
+9/29/24, 8:06 PM - Nícolas Auersvalt: tipo, g++ -Wall teste.cpp
+9/29/24, 8:07 PM - Gabriel: hmm ok
+9/29/24, 8:07 PM - Gabriel: tem também o input do que pede pra fazer. "I", "V", "R" ou "S" pra sair
+9/29/24, 8:08 PM - Nícolas Auersvalt: isso, dai ficaria algo tipo
+9/29/24, 8:08 PM - Gabriel: isso!
+9/29/24, 8:08 PM - Gabriel: ou
+9/29/24, 8:08 PM - Gabriel: 2*x^2 + 4
+9/29/24, 8:08 PM - Gabriel: o que eu mais gosto são as raízes, fdc kkkk
+9/29/24, 8:10 PM - Nícolas Auersvalt: o nome do projeto vai ser Pornlimonio msm?
+9/29/24, 8:14 PM - Gabriel: kkkkkk era pra ser "Pornlinomio", mas pode ser Calculadora de Polinômios mesmo. fiz só pra zoar
+9/29/24, 8:20 PM - Nícolas Auersvalt: O mas vê o arquivo input que dai eu termino de arrumar no site (lá tenho que colocar como preset o input), vou ver um outro projeto
+9/29/24, 8:52 PM - Gabriel: pia, pelo cat que vc deu, pode ser isso? 👇
+9/29/24, 8:52 PM - Gabriel: This message was deleted
+9/29/24, 8:53 PM - Gabriel: <Media omitted>
+9/29/24, 9:01 PM - Gabriel: sem querer bisbilhotar, mas o que é esse outro projeto? só de curiosidade mesmo
+9/29/24, 9:02 PM - Nícolas Auersvalt: Chat Bot
+9/29/24, 9:02 PM - Nícolas Auersvalt: eu fiz o projeto de Machine Learning de Estatística em python
+9/29/24, 9:02 PM - Nícolas Auersvalt: dai eu quero fazer outro projeto de IA
+9/29/24, 9:47 PM - Gabriel: foda
+9/29/24, 9:51 PM - Nícolas Auersvalt: não conseguimos achar alternativa ao replit
+9/29/24, 9:51 PM - Nícolas Auersvalt: agora vai ter que ser no pelo, shell linux e git, ou vscode com extensão live share
+9/29/24, 9:52 PM - Gabriel: aquele codespace nn deu boa?
+9/29/24, 9:53 PM - Nícolas Auersvalt: usamo um dia e foi 75% do armazenamento
+9/29/24, 9:53 PM - Nícolas Auersvalt: foi um tira gosto só, e o meu github é o Pro ainda
+9/29/24, 9:53 PM - Nícolas Auersvalt: então faze o que
+9/29/24, 9:53 PM - Gabriel: fodeu
+9/29/24, 9:54 PM - Gabriel: quando puder ver se isso da, me avisa dai pf?
+O que deseja fazer? (pressione I para integrar, V para calcular valor,
+ R para achar raízes e S para sair):
+9/29/24, 9:58 PM - Nícolas Auersvalt: deu isso
+9/29/24, 9:58 PM - Nícolas Auersvalt: é isso msm?
+9/29/24, 10:09 PM - Gabriel: isso, pfto
+9/29/24, 10:11 PM - Gabriel: da pra tirar os printfs se quiser e só deixar o final
+9/29/24, 10:11 PM - Gabriel: o "P tem 3 raízes As raízes são...
+9/29/24, 10:12 PM - Gabriel: o texto dizendo "o que deseja fazer?" não vejo pq tirar também
+9/29/24, 10:12 PM - Gabriel: mas todo o resto é bem de boas. Deixei assim pra mostrar todo o processo
+9/29/24, 10:13 PM - Gabriel: mandei o projeto pra leyza e pro dorini
+9/29/24, 10:14 PM - Gabriel: <Media omitted>
+9/29/24, 10:14 PM - Gabriel: <Media omitted>
+9/29/24, 10:14 PM - Gabriel: se quiserem entender melhor
+9/29/24, 10:14 PM - Gabriel: vou subir os dois no github também
+9/29/24, 10:26 PM - Nícolas Auersvalt: veja o código
+9/29/24, 10:26 PM - Nícolas Auersvalt: <Media omitted>
+9/29/24, 10:26 PM - Nícolas Auersvalt: execute
+9/29/24, 10:26 PM - Nícolas Auersvalt: veja se está tudo certinho
+9/29/24, 10:32 PM - Nícolas Auersvalt: acho que agora deu boa
+9/29/24, 10:33 PM - Gabriel: ok, pera
+9/29/24, 10:33 PM - Gabriel: ja testo
+9/29/24, 10:36 PM - Nícolas Auersvalt: qual o nome completo de vcs
+9/29/24, 10:42 PM - Gabriel: Gabriel Lazari Trevisani
+9/29/24, 10:46 PM - Gabriel: man, preciso baixar o phyton
+9/29/24, 10:46 PM - Nícolas Auersvalt: tá usando windows?
+9/29/24, 10:46 PM - Nícolas Auersvalt: abre no wsl ou no terminal do vscode
+9/29/24, 10:46 PM - Gabriel: nao
+9/29/24, 10:46 PM - Gabriel: linux
+9/29/24, 10:50 PM - Nícolas Auersvalt: hein
+9/29/24, 10:50 PM - Nícolas Auersvalt: tem uma explicação do seu código?
+9/29/24, 10:50 PM - Nícolas Auersvalt: nesse formato aqui:
+9/29/24, 10:51 PM - Nícolas Auersvalt: que dai eu coloco
+9/29/24, 10:53 PM - Gabriel: tem no pdf explicando cada função
+9/29/24, 10:53 PM - Gabriel: nmrl, tem várias
+9/29/24, 10:53 PM - Gabriel: nesse pdf
+9/29/24, 10:54 PM - Gabriel: pia, vou dormir agr mas amanhã vejo a instalação fo phyton
+9/29/24, 10:54 PM - Nícolas Auersvalt: o
+9/29/24, 10:54 PM - Nícolas Auersvalt: vc tem portfolio?
+9/29/24, 10:54 PM - Gabriel: tenho que atualizar o sistema mas o 4g ta mto ruim
+9/29/24, 10:54 PM - Nícolas Auersvalt: calmae vo atualiza o website pra vc ver
+9/29/24, 10:54 PM - Gabriel: oq q eh isso?
+9/29/24, 10:56 PM - You changed the group description
+9/29/24, 10:57 PM - Gabriel: boa
+9/29/24, 10:57 PM - Nícolas Auersvalt: vo reboota o site
+9/29/24, 10:58 PM - Nícolas Auersvalt: ae
+9/29/24, 10:59 PM - Nícolas Auersvalt: seguinte, cada um que desenvolver um projeto eu coloco lá
+9/29/24, 10:59 PM - Gabriel: man, ta quase pfto
+9/29/24, 10:59 PM - Nícolas Auersvalt: eu upei e agora n tá funcionando
+9/29/24, 10:59 PM - Nícolas Auersvalt: mas q caralho
+9/29/24, 10:59 PM - Gabriel: ahhh ok
+9/29/24, 11:00 PM - Nícolas Auersvalt: 2*x^2 + 4
+9/29/24, 11:01 PM - Gabriel: <Media omitted>
+9/29/24, 11:01 PM - Gabriel: nmrl @554192064755 vc eh mto foda
+9/29/24, 11:01 PM - Gabriel: lambda labs eh pfto tbm
+9/29/24, 11:01 PM - Gabriel: pqp
+9/29/24, 11:02 PM - Gabriel: ?
+9/29/24, 11:02 PM - Gabriel: tenho que ir man
+9/29/24, 11:02 PM - Gabriel: amanha a gente continua
+9/29/24, 11:02 PM - Gabriel: os títulos tbm tao mto bons, nmrl
+9/29/24, 11:03 PM - Nícolas Auersvalt: blz
+9/29/24, 11:24 PM - Nícolas Auersvalt: agora tem gráfico tb
+9/29/24, 11:24 PM - Nícolas Auersvalt: <Media omitted>
+9/29/24, 11:26 PM - Nícolas Auersvalt: alguém online para testar?
+9/29/24, 11:34 PM - Nícolas Auersvalt: <Media omitted>
+9/29/24, 11:35 PM - Nícolas Auersvalt: <Media omitted>
+9/29/24, 11:35 PM - Pedro: Half life
+9/29/24, 11:35 PM - Nícolas Auersvalt: <Media omitted>
+9/29/24, 11:35 PM - Nícolas Auersvalt: q
+9/29/24, 11:36 PM - Nícolas Auersvalt: CARALHO
+9/29/24, 11:36 PM - Nícolas Auersvalt: VERDADE KKKKKKKKKKKKKKKKKK
+9/29/24, 11:36 PM - Pedro: Kkkkk
+9/29/24, 11:37 PM - Nícolas Auersvalt: <Media omitted>
+9/29/24, 11:37 PM - Nícolas Auersvalt: pronto asfklansfl
+9/29/24, 11:37 PM - Pedro: Kkkk
+9/29/24, 11:37 PM - Pedro: Tem q ser esse
+9/29/24, 11:37 PM - Nícolas Auersvalt: nunca joguei HL, é bom?
+9/29/24, 11:37 PM - Nícolas Auersvalt: vou deixar assim ent
+9/29/24, 11:37 PM - Pedro: Sim e mt
+9/29/24, 11:37 PM - Pedro: Show
+9/29/24, 11:45 PM - Nícolas Auersvalt: ó
+9/29/24, 11:45 PM - Nícolas Auersvalt: <Media omitted>
+9/29/24, 11:46 PM - Nícolas Auersvalt: achei que ficou meio gordinho esse círculo
+9/29/24, 11:49 PM - Nícolas Auersvalt: <Media omitted>
+9/29/24, 11:52 PM - Nícolas Auersvalt: <Media omitted>
+9/29/24, 11:55 PM - Nícolas Auersvalt: <Media omitted>
+9/29/24, 11:59 PM - Nícolas Auersvalt: <Media omitted>
+9/30/24, 12:02 AM - Nícolas Auersvalt: <Media omitted>

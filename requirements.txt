@@ -1,4 +1,7 @@
 streamlit
 mysql-connector-python
 python-dotenv
-
+numpy
+plotly
+networkx
+matplotlib

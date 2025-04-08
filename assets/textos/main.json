@@ -1,0 +1,23 @@
+{
+    "titulo": "Bem-vindo ao Laboratório Lambda",
+    "mensagem_inicial": "Aqui serão desenvolvidos alguns projetos, fique à vontade para testar!",
+    "pesquisador_principal": "Nícolas Auersvalt Marques",
+    "mentor_principal": "Alan Turing",
+    "projetos_principal": "Laboratório Lambda (Website StreamLit), Computação Gráfica, Grafos, Criptografia, Polinômios (assistência)",
+    "linkedin_principal": "https://www.linkedin.com/in/nicolas-auersvalt/",
+    "portfolio_principal": "https://linktr.ee/auersvalt",
+    "pesquisador_associado": {
+      "nome": "Gabriel Lazari Trevisani",
+      "mentor": "Leonhard Euler",
+      "projetos": "Polinômios",
+      "linkedin": "https://www.linkedin.com/in/gabriel-trevisani-a811131b5/"
+    },
+    "pesquisador_assistente": {
+      "nome": "Pedro Eugenio Marin Do Nascimento",
+      "mentor": "Robert Oppenheimer",
+      "projetos": "Grafos (assistência), Criptografia (assistência)",
+      "linkedin": "https://www.linkedin.com/in/pedro-nascimento-4a35982b0/"
+    },
+    "revisor": "Guilherme de Souza Carneiro Garcia"
+  }
+  
