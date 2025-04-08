@@ -19,7 +19,7 @@ Nicolas Rossi Gariba
 
 ---
 
-https://stockyutfpr.streamlit.app/
+https://stockyapp.streamlit.app/
 
 ## Requisitos Mínimos
 
