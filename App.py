@@ -4,7 +4,6 @@ import hashlib
 
 from header import *
 from page.pageGrafo import *
-from page.pageGrafica import *
 from page.pagePolinomio import *
 from page.pageCifra import *
 from page.main import *
