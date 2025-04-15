@@ -9,17 +9,16 @@ text_path = os.path.join('assets', 'textos', 'main.json')
 with open(text_path, 'r', encoding='utf-8') as f:
     dados = json.load(f)
 
-def estoque():
+class Estoque:
+    def __init__(self, input_str):
+        self.input = input_str.replace(' ', '')
 
-    st.title("Bem-vindo ao Stocky")
+        pass
 
-    # Exibir a imagem principal
-    imagem_path = "assets/images/logo_sem_fundo_texto"
-    st.image(imagem_path, width=400)
+    def estoque():
 
-    # Exibir mensagem inicial
-    st.write(dados['mensagem_inicial'])
-    st.markdown("---")
+        st.title("Bem-vindo ao Stocky")
 
-
-
+        # Exibir mensagem inicial
+        st.write(dados['mensagem_inicial'])
+        st.markdown("---")

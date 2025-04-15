@@ -8,8 +8,6 @@ from page.main import *
 from dotenv import load_dotenv
 import os
 
-
-
 # ----- Funções de Banco de Dados -----
 
 def conectar():
@@ -47,7 +45,8 @@ def cadastrar_usuario(nome, email, senha):
         cursor.close()
         conn.close()
 
-# ----- Função de Tela de Cadastro -----
+
+# ----- Função de Tela de Cadastro ----- #
 
 def tela_cadastro():
     st.subheader("Cadastro de Novo Usuário")
