@@ -3,9 +3,7 @@ import mysql.connector
 import hashlib
 
 from header import *
-from page.pageGrafo import *
-from page.pagePolinomio import *
-from page.pageCifra import *
+from page.estoque import *
 from page.main import *
 from dotenv import load_dotenv
 import os
@@ -104,19 +102,13 @@ def main():
     else:
         st.sidebar.success(f"Logado como: {st.session_state['usuario']}")
 
-        menu = ["Início", "Computação Gráfica", "Busca de Caminhos em Grafo", "Criptografia", "Polinômios"]
+        menu = ["Início", "Estoque"]
         escolha = st.sidebar.selectbox("Escolha a página:", menu)
 
         if escolha == "Início":
             inicio()
-        elif escolha == "Computação Gráfica":
-            pagina_operacoes()
-        elif escolha == "Busca de Caminhos em Grafo":
-            pagina_grafo()
-        elif escolha == "Criptografia":
-            pagina_cifra()
-        elif escolha == "Polinômios":
-            pagina_polinomios()
+        elif escolha == "Estoque":
+            estoque()
 
         if st.sidebar.button("Sair"):
             st.session_state["logado"] = False

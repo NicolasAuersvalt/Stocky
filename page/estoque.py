@@ -9,14 +9,7 @@ text_path = os.path.join('assets', 'textos', 'main.json')
 with open(text_path, 'r', encoding='utf-8') as f:
     dados = json.load(f)
 
-    # Função para exibir informações dos pesquisadores
-def exibir_pesquisador(nome, mentor, projetos, linkedin, github):
-
-    col1, col2 = st.columns(2)
-    
-    st.markdown("---")
-
-def inicio():
+def estoque():
 
     st.title("Bem-vindo ao Stocky")
 
