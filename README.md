@@ -31,6 +31,16 @@ https://stockyapp.streamlit.app/
 
 ---
 
+## Estrutura do Projeto
+```
+📁 Stocky
+├── 📂 page               # Páginas individuais
+├── 📂 assets                # Arquivos estáticos, mídias e textos
+├── 📂 src                 # Códigos fonte de cada classe
+├── App.py                   # Arquivo principal da aplicação
+└── README.md                # Documentação do projeto
+```
+
 ## Requisitos Mínimos
 
 Antes de executar o site, certifique-se de ter as seguintes ferramentas instaladas no seu sistema:
