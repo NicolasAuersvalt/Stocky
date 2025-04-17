@@ -1,6 +1,6 @@
 # Stocky
 
-![Stocky](assets/logo_texto.png)
+![Stocky](assets/images/logo_texto.png)
 
 ---
 
