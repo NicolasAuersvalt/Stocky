@@ -1,8 +1,7 @@
 class Produto:
-    def __init__(self, id:str, tipo:std):
+    def __init__(self, id:str, tipo:str):
         self.id = id
         self.tipo = tipo
-        self.nome = 
     
     def getId(self):
         return self.id
