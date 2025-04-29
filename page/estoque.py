@@ -1,19 +1,32 @@
+# page/estoque.py
+
 import streamlit as st
 import json
 import os
-import webbrowser
+from abc import ABC, abstractmethod
+from pathlib import Path
 
-text_path = os.path.join('assets', 'textos', 'main.json')
+# Classe base (se quiser reaproveitar com outras páginas)
+class Page(ABC):
+    @abstractmethod
+    def show(self):
+        pass
 
-# Carregar os dados do arquivo JSON
-with open(text_path, 'r', encoding='utf-8') as f:
-    dados = json.load(f)
+# Classe da página de Estoque
+class EstoquePage(Page):
+    def __init__(self, text_path: str):
+        self.text_path = Path(text_path)
+        self.dados = self._load_data()
 
+    def _load_data(self):
+        """Carrega os dados do JSON."""
+        with open(self.text_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
 
-def estoque():
+    def show(self):
+        """Renderiza a página de Estoque no Streamlit."""
+        st.title("Bem-vindo ao Estoque")
 
-    st.title("Bem-vindo ao Estoque")
-
-    # Exibir mensagem inicial
-    st.write(dados['mensagem_inicial'])
-    st.markdown("---")
+        mensagem = self.dados.get("mensagem_inicial", "Mensagem padrão de estoque.")
+        st.write(mensagem)
+        st.markdown("---")

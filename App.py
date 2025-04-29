@@ -1,13 +1,12 @@
 import streamlit as st
 import mysql.connector
 import hashlib
-
-from header import *
-from page.estoque import *
-from page.main import *
-from page.estoque import *
-from dotenv import load_dotenv
 import os
+
+from dotenv import load_dotenv
+from header import *
+from page.main import MainPage
+from page.estoque import EstoquePage
 
 # ----- Funções de Banco de Dados -----
 
@@ -18,7 +17,6 @@ def conectar():
         password=st.secrets["mysql"]["password"],
         database=st.secrets["mysql"]["database"]
     )
-
 
 def verificar_usuario(email, senha):
     conn = conectar()
@@ -46,8 +44,7 @@ def cadastrar_usuario(nome, email, senha):
         cursor.close()
         conn.close()
 
-
-# ----- Função de Tela de Cadastro ----- #
+# ----- Tela de Cadastro -----
 
 def tela_cadastro():
     st.subheader("Cadastro de Novo Usuário")
@@ -69,7 +66,7 @@ def tela_cadastro():
             else:
                 st.error("Erro ao cadastrar. Verifique se o email já está em uso.")
 
-# ----- Função Principal com Login e Menus -----
+# ----- Função Principal -----
 
 def main():
     st.set_page_config(page_title="Projeto com Login", layout="wide")
@@ -106,9 +103,17 @@ def main():
         escolha = st.sidebar.selectbox("Escolha a página:", menu)
 
         if escolha == "Início":
-            inicio()
+            page = MainPage(
+                text_path=os.path.join("assets", "textos", "main.json"),
+                image_path=os.path.join("assets", "images", "logo_sem_fundo_texto.png")
+            )
+            page.show()
+
         elif escolha == "Estoque":
-            estoque()
+            page = EstoquePage(
+                text_path=os.path.join("assets", "textos", "main.json")
+            )
+            page.show()
 
         if st.sidebar.button("Sair"):
             st.session_state["logado"] = False
