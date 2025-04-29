@@ -9,16 +9,11 @@ text_path = os.path.join('assets', 'textos', 'main.json')
 with open(text_path, 'r', encoding='utf-8') as f:
     dados = json.load(f)
 
-class Estoque:
-    def __init__(self, input_str):
-        self.input = input_str.replace(' ', '')
 
-        pass
+def estoque():
 
-    def estoque():
+    st.title("Bem-vindo ao Estoque")
 
-        st.title("Bem-vindo ao Stocky")
-
-        # Exibir mensagem inicial
-        st.write(dados['mensagem_inicial'])
-        st.markdown("---")
+    # Exibir mensagem inicial
+    st.write(dados['mensagem_inicial'])
+    st.markdown("---")

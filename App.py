@@ -5,6 +5,7 @@ import hashlib
 from header import *
 from page.estoque import *
 from page.main import *
+from page.estoque import *
 from dotenv import load_dotenv
 import os
 

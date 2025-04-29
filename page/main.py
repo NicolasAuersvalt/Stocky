@@ -21,7 +21,7 @@ def inicio():
     st.title("Bem-vindo ao Stocky")
 
     # Exibir a imagem principal
-    imagem_path = "assets/images/logo_sem_fundo_texto"
+    imagem_path = "assets/images/logo_sem_fundo_texto.png"
     st.image(imagem_path, width=400)
 
     # Exibir mensagem inicial
