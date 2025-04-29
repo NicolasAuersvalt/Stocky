@@ -1,6 +1,6 @@
 from entidade import Entidade
 
-class Usuario(Entidade):
+class Empresa(Entidade):
 
     def __init__(self, _nome: str, _email: str, _senha: str, _id: str, _empresa):
         super().__init__(_nome, _email, _senha, _id, _empresa)

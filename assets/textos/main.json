@@ -1,5 +1,5 @@
 {
     "titulo": "Bem-vindo ao Stocky",
-    "mensagem_inicial": "GERENCIADOR DE ESTOQUE BLABLABLA"
+    "mensagem_inicial": "O Stocky é uma plataforma de controle de estoque pensada para empresas que têm vários vendedores. Cada vendedor só enxerga os produtos aos quais tem autorização e pode registrar entradas (compras, ajustando o saldo e informando o custo) e saídas (vendas, reduzindo o estoque e definindo o preço de venda). Do outro lado, o administrador vê tudo: o catálogo completo da empresa e os estoques individuais de cada vendedor, com detalhes de quantidade, custos de compra e valores de venda ao longo do tempo. Desenvolvido em Python com Streamlit e MySQL, o Stocky adota boas práticas de segurança: as credenciais ficam protegidas em variáveis de ambiente , e cada usuário autentica-se com login e senha próprios antes de acessar sua área. Dessa forma, mantemos seus dados seguros e seu controle de estoque sempre confiável."
   }
   
