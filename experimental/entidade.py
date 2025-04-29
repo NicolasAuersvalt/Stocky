@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 class Entidade(ABC):
 
-    def __init__(self, _nome: str, _email: str, _senha: str, _id: str, _empresa):
+    def __init__(self, _nome: str, _email: str, _senha: str, _id: str):
         self.name = _nome
         self.id = _id
         self.email = _email
@@ -18,7 +18,7 @@ class Entidade(ABC):
     def getEmail(self):
         return self.email
 
-    def showInfo(self):
+    def showInfo(self) -> None:
         print("Id: {}".format(self.getId()))
         print("Nome: {}".format(self.getName()))
         print("Email: {}".format(self.getEmail()))
