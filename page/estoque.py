@@ -25,7 +25,7 @@ class EstoquePage(Page):
 
     def show(self):
         """Renderiza a página de Estoque no Streamlit."""
-        st.title("Bem-vindo ao Estoque")
+        #st.title("Bem-vindo ao Estoque")
 
         mensagem = self.dados.get("mensagem_inicial", "Mensagem padrão de estoque.")
         st.write(mensagem)

@@ -14,7 +14,7 @@ class Empresa(Entidade):
         self.estoque = _estoque
 
     def procurarEstoque(self, tipo:str):
-        if()
+        if()0000000000000000000000000
 
     def vender(self, _tipo:str):
         if(self.procurarEstoque(_tipo))

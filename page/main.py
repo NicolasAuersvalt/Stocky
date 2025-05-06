@@ -26,7 +26,7 @@ class MainPage(Page):
 
     def show(self):
         """Renderiza a página principal no Streamlit."""
-        st.title("Bem-vindo ao Stocky")
+        #st.title("Bem-vindo, usuário")
 
         # Exibe a imagem principal
         if self.image_path.exists():
