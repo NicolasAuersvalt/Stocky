@@ -1,29 +1,22 @@
 import usuario
-import Produto
+from usuario import Usuario
+from empresa import Empresa
+
 from typing import Dict
 
 
-class Vendedor(usuario.Usuario):
-    def __init__(self, nome: str, idd: str, est: usuario.estoque.Estoque, Produtos:Dict[Produto.Produto, int] ):
-       super().__init__(nome, idd, est)
-       self.Produtos = Produtos
+class Vendedor(Usuario):  # Use "Usuario" se estiver no mesmo arquivo
+    def __init__(self, _nome: str, _email: str, _senha: str, _id: str):
+        super().__init__(_nome, _email, _senha, _id)
+        self.produtos = []
+        self.empresa = None 
 
-    def teste():
-        print("ALO")
-
-    def ContabilizaVendas(self, Prod: Produto.Produto, qnt: int):
-        self.QntVendas+= qnt
-    
-        if(Prod in self.produtos):
-            self.produtos[Prod]-=qnt
-    
-        else:
-            print("Produto não encontrado.")
-    
-    #def ComprarProdutos(self, Prod, qnt):
 
     def GetVendas(self):
         return self.GetVendas
 
-    #def GetCompras(self):
-    #    return self.compras
+    def setEmpresa(self, _empresa: Empresa):
+        self.empresa = _empresa
+
+    def vender(self, tipo:str):
+        empresa.vender(tipo)
