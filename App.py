@@ -99,10 +99,10 @@ def main():
     else:
         st.sidebar.success(f"Logado como: {st.session_state['usuario']}")
 
-        menu = ["Início", "Estoque"]
+        menu = ["Estoque", "Info"]
         escolha = st.sidebar.selectbox("Escolha a página:", menu)
 
-        if escolha == "Início":
+        if escolha == "Info":
             page = MainPage(
                 text_path=os.path.join("assets", "textos", "main.json"),
                 image_path=os.path.join("assets", "images", "logo_sem_fundo_texto.png")
