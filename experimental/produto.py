@@ -20,5 +20,3 @@ class Produto:
 
     def getPreco(self):
         return self.preco
-    
-    def 
