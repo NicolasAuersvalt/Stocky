@@ -115,7 +115,7 @@ class Administrador(Entidade):
         if(self.empresa==None):
             print("Não é associado a nenhuma empresa!")
         else:
-            print(getEmpresa().getName())
+            print(self.getEmpresa().getName())
 
 class Empresa(Entidade):
     def __init__(self, _nome: str, _email: str, _senha: str, _id: str):
@@ -127,6 +127,10 @@ class Empresa(Entidade):
 
     def setEstoque(self, _estoque):
         self.listaEstoque = _estoque
+
+    def tamanhoEstoque(self, _estoque: Estoque):
+        # Retorna a quantidade de produtos no estoque passado como argumento
+        return _estoque.getQuantidade()
 
     def procurarEstoque(self, tipo: str):
         for item in self.listaEstoque:
