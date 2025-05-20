@@ -7,10 +7,10 @@ class Administrador(Entidade):
         self.empresa = None
 
     def setEmpresa(self, _empresa):
-        empresa = _empresa
+        self.empresa = _empresa
 
     def getEmpresa(self):
-        return empresa
+        return self.empresa
 
     def showInfo(self) -> None:
         print("Id: {}".format(self.getId()))
@@ -19,4 +19,4 @@ class Administrador(Entidade):
         if(self.empresa==None):
             print("Não é associado a nenhuma empresa!")
         else:
-            print(getEmpresa().getName())
+            print(self.getEmpresa().getName())
