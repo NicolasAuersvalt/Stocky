@@ -37,8 +37,8 @@ usuario = Usuario("Nicolas", "nicolasauersvalt@gmail.com", "123", "1")
 empresa = Empresa("Utfpr", "utfpr@gmail.com", "213", "2")
 
 usr = Vendedor("user","usr.email@.com", "298365", "9174")
-
-usr.vender(0000)
+usr.set_empresa(empresa)
+usr.vender(1)
 
 
 '''
