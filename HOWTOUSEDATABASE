@@ -1,0 +1,63 @@
+no terminal, digite sudo mysql
+
+==================================================================================
+
+Comandos de Banco de Dados: 
+
+SHOW DATABASES;	
+Lista todos os bancos de dados disponíveis
+
+CREATE DATABASE nome;	
+Cria um novo banco de dados com o nome escolhido.
+
+USE nome;
+Seleciona o banco de dados para começar a trabalhar com ele.
+
+DROP DATABASE nome;
+Apaga um banco de dados (⚠️ cuidado, isso remove tudo).
+
+
+==================================================================================
+
+Comandos de tabela:
+
+SHOW TABLES;
+Lista todas as tabelas do banco de dados selecionado.
+
+DESCRIBE tabela;	Mostra a estrutura da tabela (colunas, tipos, etc).
+
+CREATE TABLE nome (...);	
+Cria uma nova tabela com os campos e tipos desejados.
+
+DROP TABLE nome;	
+Apaga uma tabela (⚠️ apaga todos os dados dela).
+
+ALTER TABLE nome ADD coluna tipo;	
+Adiciona uma nova coluna.
+
+ALTER TABLE nome MODIFY coluna novo_tipo;	
+Altera o tipo de uma coluna.
+
+ALTER TABLE nome DROP COLUMN coluna;	
+Remove uma coluna da tabela.
+
+==================================================================================
+
+Comandos de Manipulação de Dados:
+
+INSERT INTO tabela (...) VALUES (...);	
+Insere um novo registro.
+
+SELECT * FROM tabela;	
+Seleciona (exibe) todos os registros da tabela.
+
+SELECT campo1, campo2 FROM tabela WHERE ...;	
+Seleciona campos específicos com filtros.
+
+UPDATE tabela SET campo = valor WHERE ...;	
+Atualiza dados existentes.
+
+DELETE FROM tabela WHERE ...;	
+Remove registros com base em uma condição.
+
+==================================================================================

@@ -3,48 +3,9 @@ import mysql.connector
 import hashlib
 import os
 
-from dotenv import load_dotenv
-from header import *
-from page.main import MainPage
-from page.estoque import EstoquePage
-
-# ----- Funções de Banco de Dados -----
-
-def conectar():
-    return mysql.connector.connect(
-        host=st.secrets["mysql"]["host"],
-        user=st.secrets["mysql"]["user"],
-        password=st.secrets["mysql"]["password"],
-        database=st.secrets["mysql"]["database"]
-    )
-
-def verificar_usuario(email, senha):
-    conn = conectar()
-    cursor = conn.cursor()
-    senha_hash = hashlib.sha256(senha.encode()).hexdigest()
-    cursor.execute("SELECT * FROM usuarios WHERE email = %s AND senha = %s", (email, senha_hash))
-    usuario = cursor.fetchone()
-    cursor.close()
-    conn.close()
-    return usuario
-
-def cadastrar_usuario(nome, email, senha):
-    conn = conectar()
-    cursor = conn.cursor()
-    senha_hash = hashlib.sha256(senha.encode()).hexdigest()
-    try:
-        cursor.execute("INSERT INTO usuarios (nome, email, senha) VALUES (%s, %s, %s)", 
-                       (nome, email, senha_hash))
-        conn.commit()
-        return True
-    except mysql.connector.Error as e:
-        print("Erro:", e)
-        return False
-    finally:
-        cursor.close()
-        conn.close()
-
-# ----- Tela de Cadastro -----
+from src.Gerenciadores.gerenciadorLogin import *
+from page.estoque import *
+from page.main import *
 
 def tela_cadastro():
     st.subheader("Cadastro de Novo Usuário")
