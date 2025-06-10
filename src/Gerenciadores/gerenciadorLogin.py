@@ -1,51 +1,70 @@
+# src/Gerenciadores/gerenciadorLogin.py
+
 import mysql.connector
 import streamlit as st
 import hashlib
-#from src.Entidades.administrador import Administrador
-#from src.Entidades.empresa import Empresa
 
-from src.geral import *
+class GerenciadorLogin:
+    """
+    Classe que encapsula toda a lógica de interação com o banco de dados
+    para autenticação e cadastro de usuários.
+    """
 
-def conectar():
-    return mysql.connector.connect(
-        host=st.secrets["mysql"]["host"],
-        user=st.secrets["mysql"]["user"],
-        password=st.secrets["mysql"]["password"],
-        database=st.secrets["mysql"]["database"]
-    )
+    def __init__(self):
+        """
+        O construtor da classe. No futuro, poderia ser usado para inicializar
+        um pool de conexões, por exemplo.
+        """
+        pass
 
-def verificar_usuario(email, senha):
-    conn = conectar()
-    cursor = conn.cursor()
-    senha_hash = hashlib.sha256(senha.encode()).hexdigest()
-    cursor.execute("SELECT * FROM usuarios WHERE email = %s AND senha = %s", (email, senha_hash))
-    usuario = cursor.fetchone()
-    cursor.close()
-    conn.close()
-    return usuario
+    @staticmethod
+    def _conectar():
+        """
+        Método estático e privado para conectar ao banco de dados.
+        Não precisa de 'self' pois não acessa dados da instância.
+        """
+        return mysql.connector.connect(
+            host=st.secrets["mysql"]["host"],
+            user=st.secrets["mysql"]["user"],
+            password=st.secrets["mysql"]["password"],
+            database=st.secrets["mysql"]["database"]
+        )
 
-def cadastrar_usuario(nome, email, senha, tipo):
-    conn = conectar()
-    cursor = conn.cursor()
-    senha_hash = hashlib.sha256(senha.encode()).hexdigest()
-    try:
-        cursor.execute("INSERT INTO usuarios (nome, email, senha, tipo) VALUES (%s, %s, %s, %s)",
-                       (nome, email, senha_hash, tipo))
-        conn.commit()
-        return True
-    except mysql.connector.Error as e:
-        print("Erro:", e)
-        return False
-    finally:
+    def verificar_usuario(self, email: str, senha: str):
+        """
+        Verifica as credenciais do usuário no banco de dados.
+        Agora é um método da classe.
+        """
+        conn = self._conectar()
+        cursor = conn.cursor(dictionary=True)
+        
+        senha_hash = hashlib.sha256(senha.encode()).hexdigest()
+        
+        cursor.execute("SELECT * FROM usuarios WHERE email = %s AND senha = %s", (email, senha_hash))
+        usuario = cursor.fetchone()
+        
         cursor.close()
         conn.close()
+        return usuario
 
-def fazer_login(email, senha):
-    usuario = verificar_usuario(email, senha)
-    if usuario:
-        id, nome, email, senha_db, tipo = usuario
-        if tipo == "administrador":
-            return Administrador(nome, email, senha_db, id)
-        elif tipo == "empresa":
-            return Empresa(nome, email, senha_db, id)
-    return None
+    def cadastrar_usuario(self, nome: str, email: str, senha: str, tipo: str):
+        """
+        Cadastra um novo usuário no banco de dados.
+        Agora é um método da classe.
+        """
+        conn = self._conectar()
+        cursor = conn.cursor()
+        
+        senha_hash = hashlib.sha256(senha.encode()).hexdigest()
+        
+        try:
+            cursor.execute("INSERT INTO usuarios (nome, email, senha, tipo) VALUES (%s, %s, %s, %s)",
+                           (nome, email, senha_hash, tipo))
+            conn.commit()
+            return True
+        except mysql.connector.Error as e:
+            print(f"Erro ao cadastrar usuário: {e}")
+            return False
+        finally:
+            cursor.close()
+            conn.close()

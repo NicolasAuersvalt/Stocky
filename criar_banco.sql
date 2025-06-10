@@ -9,7 +9,8 @@ CREATE TABLE usuarios (
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
-    tipo ENUM('administrador', 'empresa') NOT NULL
+    -- MODIFICADO: O ENUM agora aceita 'admin' e 'padrão' para alinhar com a aplicação.
+    tipo ENUM('admin', 'padrão') NOT NULL
 );
 
 -- Tabela empresas (detalhes extras, vinculada a um usuário)
@@ -21,12 +22,11 @@ CREATE TABLE empresas (
 );
 
 -- Tabela produtos, agora simplificada e vinculada diretamente à empresa
--- A coluna 'categoria' foi movida para cá, o que é mais lógico.
 CREATE TABLE produtos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     empresa_id INT NOT NULL,      -- A qual empresa este produto pertence
-    nome VARCHAR(255) NOT NULL,   -- Nome do produto (antes era 'tipo')
-    categoria VARCHAR(100),       -- Categoria do produto (ex: 'Bebidas', 'Queijos')
+    nome VARCHAR(255) NOT NULL,   -- Nome do produto
+    categoria VARCHAR(100),       -- Categoria do produto
     preco DECIMAL(10,2) NOT NULL,
     quantidade INT NOT NULL DEFAULT 0, -- Adicionado para controle de estoque
     FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE
@@ -35,20 +35,20 @@ CREATE TABLE produtos (
 -- DADOS INICIAIS PARA TESTE
 
 -- 1. Insere um administrador (terá id = 1)
--- Em uma aplicação real, o hash da senha é feito no backend (Python), não no banco.
+-- MODIFICADO: Inserindo com o tipo 'admin'
 INSERT INTO usuarios (nome, email, senha, tipo)
-VALUES ('Admin Teste', 'admin@teste.com', SHA2('admin123', 256), 'administrador');
+VALUES ('Admin Teste', 'admin@teste.com', SHA2('admin123', 256), 'admin');
 
 -- 2. Insere um usuário para a empresa (terá id = 2)
+-- MODIFICADO: Inserindo com o tipo 'padrão'
 INSERT INTO usuarios (nome, email, senha, tipo)
-VALUES ('Dono da Empresa', 'empresa@teste.com', SHA2('empresa123', 256), 'empresa');
+VALUES ('Dono da Empresa', 'empresa@teste.com', SHA2('empresa123', 256), 'padrão');
 
 -- 3. Cria o perfil da empresa, vinculando ao usuário de id = 2
 INSERT INTO empresas (usuario_id, nome_fantasia)
 VALUES (2, 'Empresa de Vinhos e Queijos LTDA');
 
 -- 4. Insere produtos para a empresa de id = 1 (obtido do INSERT acima em 'empresas')
--- Note como agora a estrutura é mais limpa.
 INSERT INTO produtos (empresa_id, nome, categoria, preco, quantidade)
 VALUES 
 (1, 'Vinho Tinto Seco', 'Bebidas', 50.00, 30),

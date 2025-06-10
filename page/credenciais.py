@@ -1,68 +1,70 @@
+# credenciais.py
+
 import streamlit as st
-import mysql.connector
-import hashlib
+# 1. A importação muda: importamos a CLASSE específica do módulo.
+from src.Gerenciadores.gerenciadorLogin import GerenciadorLogin
 
-from header import *
-from page.estoque import *
-from page.main import *
-from page.estoque import *
-from dotenv import load_dotenv
-import os
+class CredentialsPage:
+    
+    def __init__(self):
+        """
+        Ao criar a página de credenciais, também criamos uma instância
+        do nosso gerenciador de login para usar em toda a classe.
+        """
+        # 2. Criamos uma instância do gerenciador.
+        self.gerenciador = GerenciadorLogin()
 
-class CredentialsPage():
-    @staticmethod
-    def conectar():
-        return mysql.connector.connect(
-            host=st.secrets["mysql"]["host"],
-            user=st.secrets["mysql"]["user"],
-            password=st.secrets["mysql"]["password"],
-            database=st.secrets["mysql"]["database"]
-        )
-    
-    def verificar_usuario(self, email: str, senha: str):
-        conn = CredentialsPage.conectar() 
-        cursor = conn.cursor()
-        senha_hash = hashlib.sha256(senha.encode()).hexdigest()
-        cursor.execute("SELECT * FROM usuarios WHERE email = %s AND senha = %s", (email, senha_hash))
-        usuario = cursor.fetchone()
-        cursor.close()
-        conn.close()
-        return usuario
-    
-    def cadastrar_usuario(self, nome: str, email: str, senha: str):
-        conn = CredentialsPage.conectar()
-        cursor = conn.cursor()
-        senha_hash = hashlib.sha256(senha.encode()).hexdigest()
-        try:
-            cursor.execute("INSERT INTO usuarios (nome, email, senha) VALUES (%s, %s, %s)", 
-                           (nome, email, senha_hash))
-            conn.commit()
-            return True
-        except mysql.connector.Error as e:
-            # É uma boa prática logar o erro para debug no terminal
-            print(f"Erro no cadastro: {e}") 
-            return False
-        finally:
-            cursor.close()
-            conn.close()
+    def tela_login(self):
+        st.subheader("Acessar o Sistema")
+        
+        email = st.text_input("Email", key="login_email")
+        senha = st.text_input("Senha", type="password", key="login_senha")
+
+        if st.button("Entrar", key="login_button"):
+            if not email or not senha:
+                st.warning("Por favor, preencha o email e a senha.")
+                return
+
+            # 3. Usamos o método da instância do gerenciador.
+            usuario = self.gerenciador.verificar_usuario(email, senha)
+            
+            if usuario:
+                # MODIFICAÇÃO PRINCIPAL: Ajuste das chaves do session_state
+                st.session_state['logado'] = True
+                st.session_state['usuario_nome'] = usuario['nome']
+                st.session_state['usuario_tipo'] = usuario['tipo']
+                st.success(f"Login bem-sucedido! Bem-vindo(a), {usuario['nome']}!")
+                st.rerun()
+            else:
+                st.error("Email ou senha inválidos.")
 
     def tela_cadastro(self):
         st.subheader("Cadastro de Novo Usuário")
 
-        nome = st.text_input("Nome completo")
-        email = st.text_input("Email")
-        senha = st.text_input("Senha", type="password")
-        senha2 = st.text_input("Confirme a senha", type="password")
+        nome = st.text_input("Nome completo", key="cad_nome")
+        email = st.text_input("Email", key="cad_email")
+        tipo = st.selectbox("Tipo de Usuário", ["Padrão", "Admin"], key="cad_tipo")
+        senha = st.text_input("Senha", type="password", key="cad_senha")
+        senha2 = st.text_input("Confirme a senha", type="password", key="cad_senha2")
 
-        if st.button("Cadastrar"):
+        if st.button("Cadastrar", key="cad_button"):
             if senha != senha2:
                 st.warning("As senhas não coincidem!")
-            elif nome == "" or email == "" or senha == "":
-                st.warning("Preencha todos os campos.")
+            elif not all([nome, email, senha, tipo]):
+                st.warning("Preencha todos os campos obrigatórios.")
             else:
-                # CORREÇÃO 4: Chamar outro método da instância usando 'self.'
-                sucesso = self.cadastrar_usuario(nome, email, senha) 
+                # 4. Usamos o método da instância do gerenciador aqui também.
+                sucesso = self.gerenciador.cadastrar_usuario(nome, email, senha, tipo)
                 if sucesso:
-                    st.success("Usuário cadastrado com sucesso! Faça login.")
+                    st.success("Usuário cadastrado com sucesso! Agora você pode fazer login.")
                 else:
-                    st.error("Erro ao cadastrar. Verifique se o email já está em uso.")
+                    st.error("Erro ao cadastrar. O email fornecido já pode estar em uso.")
+
+    def render(self):
+        st.title("🔐 Autenticação")
+        escolha = st.sidebar.radio("Navegação", ["Login", "Cadastrar"])
+
+        if escolha == "Login":
+            self.tela_login()
+        elif escolha == "Cadastrar":
+            self.tela_cadastro()    
