@@ -12,7 +12,7 @@ CREATE TABLE usuarios (
     tipo ENUM('administrador', 'empresa') NOT NULL
 );
 
--- Tabela empresas (detalhes extras para empresa, vinculada a usuarios tipo 'empresa')
+-- Tabela empresas (detalhes extras, vinculada a um usuário)
 CREATE TABLE empresas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT NOT NULL,
@@ -20,43 +20,38 @@ CREATE TABLE empresas (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
--- Tabela estoque, vinculada à empresa
-CREATE TABLE estoque (
+-- Tabela produtos, agora simplificada e vinculada diretamente à empresa
+-- A coluna 'categoria' foi movida para cá, o que é mais lógico.
+CREATE TABLE produtos (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    empresa_id INT NOT NULL,
-    tipo VARCHAR(100) NOT NULL,
+    empresa_id INT NOT NULL,      -- A qual empresa este produto pertence
+    nome VARCHAR(255) NOT NULL,   -- Nome do produto (antes era 'tipo')
+    categoria VARCHAR(100),       -- Categoria do produto (ex: 'Bebidas', 'Queijos')
+    preco DECIMAL(10,2) NOT NULL,
+    quantidade INT NOT NULL DEFAULT 0, -- Adicionado para controle de estoque
     FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE
 );
 
--- Tabela produtos, vinculada ao estoque
-CREATE TABLE produtos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    estoque_id INT NOT NULL,
-    tipo VARCHAR(100) NOT NULL,
-    preco DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (estoque_id) REFERENCES estoque(id) ON DELETE CASCADE
-);
+-- DADOS INICIAIS PARA TESTE
 
--- Dados iniciais para teste
-
--- Insere um administrador
+-- 1. Insere um administrador (terá id = 1)
+-- Em uma aplicação real, o hash da senha é feito no backend (Python), não no banco.
 INSERT INTO usuarios (nome, email, senha, tipo)
 VALUES ('Admin Teste', 'admin@teste.com', SHA2('admin123', 256), 'administrador');
 
--- Insere uma empresa vinculada a um usuário do tipo empresa
+-- 2. Insere um usuário para a empresa (terá id = 2)
 INSERT INTO usuarios (nome, email, senha, tipo)
-VALUES ('Empresa Teste', 'empresa@teste.com', SHA2('empresa123', 256), 'empresa');
+VALUES ('Dono da Empresa', 'empresa@teste.com', SHA2('empresa123', 256), 'empresa');
 
+-- 3. Cria o perfil da empresa, vinculando ao usuário de id = 2
 INSERT INTO empresas (usuario_id, nome_fantasia)
-VALUES (2, 'Empresa Teste LTDA');
+VALUES (2, 'Empresa de Vinhos e Queijos LTDA');
 
--- Insere um estoque vinculado à empresa
-INSERT INTO estoque (empresa_id, tipo)
-VALUES (1, 'Bebidas'), (1, 'Queijos');
-
--- Insere produtos vinculados aos estoques
-INSERT INTO produtos (estoque_id, tipo, preco)
+-- 4. Insere produtos para a empresa de id = 1 (obtido do INSERT acima em 'empresas')
+-- Note como agora a estrutura é mais limpa.
+INSERT INTO produtos (empresa_id, nome, categoria, preco, quantidade)
 VALUES 
-(1, 'Vinho Tinto', 50.00),
-(1, 'Vinho Branco', 40.00),
-(2, 'Queijo Brie', 20.00);
+(1, 'Vinho Tinto Seco', 'Bebidas', 50.00, 30),
+(1, 'Vinho Branco Suave', 'Bebidas', 40.00, 25),
+(1, 'Queijo Brie', 'Laticínios', 20.00, 50),
+(1, 'Queijo Gorgonzola', 'Laticínios', 25.00, 40);

@@ -9,18 +9,18 @@ from page.estoque import *
 from dotenv import load_dotenv
 import os
 
-
-class Pages():
+class CredentialsPage():
+    @staticmethod
     def conectar():
-        return mysql.connector.connect (
-           host=st.secrets["mysql"]["host"],
-           user=st.secrets["mysql"]["user"],
-           password=st.secrets["mysql"]["password"],
-           database=st.secrets["mysql"]["database"]
+        return mysql.connector.connect(
+            host=st.secrets["mysql"]["host"],
+            user=st.secrets["mysql"]["user"],
+            password=st.secrets["mysql"]["password"],
+            database=st.secrets["mysql"]["database"]
         )
     
-    def verificar_usuario(email: str, senha: str):
-        conn = conectar()
+    def verificar_usuario(self, email: str, senha: str):
+        conn = CredentialsPage.conectar() 
         cursor = conn.cursor()
         senha_hash = hashlib.sha256(senha.encode()).hexdigest()
         cursor.execute("SELECT * FROM usuarios WHERE email = %s AND senha = %s", (email, senha_hash))
@@ -29,23 +29,24 @@ class Pages():
         conn.close()
         return usuario
     
-    def cadastrar_usuario(nome: str, email: str, senha: str):
-        conn = conectar()
+    def cadastrar_usuario(self, nome: str, email: str, senha: str):
+        conn = CredentialsPage.conectar()
         cursor = conn.cursor()
         senha_hash = hashlib.sha256(senha.encode()).hexdigest()
         try:
-           cursor.execute("INSERT INTO usuarios (nome, email, senha) VALUES (%s, %s, %s)", 
-                        (nome, email, senha_hash))
+            cursor.execute("INSERT INTO usuarios (nome, email, senha) VALUES (%s, %s, %s)", 
+                           (nome, email, senha_hash))
             conn.commit()
             return True
         except mysql.connector.Error as e:
-            print("Erro:", e)
+            # É uma boa prática logar o erro para debug no terminal
+            print(f"Erro no cadastro: {e}") 
             return False
         finally:
             cursor.close()
             conn.close()
 
-    def tela_cadastro():
+    def tela_cadastro(self):
         st.subheader("Cadastro de Novo Usuário")
 
         nome = st.text_input("Nome completo")
@@ -59,7 +60,8 @@ class Pages():
             elif nome == "" or email == "" or senha == "":
                 st.warning("Preencha todos os campos.")
             else:
-                sucesso = cadastrar_usuario(nome, email, senha)
+                # CORREÇÃO 4: Chamar outro método da instância usando 'self.'
+                sucesso = self.cadastrar_usuario(nome, email, senha) 
                 if sucesso:
                     st.success("Usuário cadastrado com sucesso! Faça login.")
                 else:

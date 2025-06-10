@@ -127,13 +127,13 @@ class EstoquePage(Page):
                         st.session_state["acao_produto"] = None
                         st.session_state["modo"] = None
                         st.session_state["produtos"] = self._carregar_produtos()
-                        st.experimental_rerun()
+                        st.rerun()
 
                 with col_cancel:
                     if st.button("Cancelar", key=f"cancel_{produto['id']}"):
                         st.session_state["acao_produto"] = None
                         st.session_state["modo"] = None
-                        st.experimental_rerun()
+                        st.rerun()
 
     # ---------- limpeza ----------
     def __del__(self):
