@@ -5,3 +5,5 @@ numpy
 plotly
 networkx
 matplotlib
+pandas
+fpdf2
