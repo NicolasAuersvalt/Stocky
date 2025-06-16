@@ -12,8 +12,7 @@ class GerenciadorLogin:
 
     def __init__(self):
         """
-        O construtor da classe. No futuro, poderia ser usado para inicializar
-        um pool de conexões, por exemplo.
+        O construtor da classe.
         """
         pass
 
@@ -21,7 +20,6 @@ class GerenciadorLogin:
     def _conectar():
         """
         Método estático e privado para conectar ao banco de dados.
-        Não precisa de 'self' pois não acessa dados da instância.
         """
         return mysql.connector.connect(
             host=st.secrets["mysql"]["host"],
@@ -32,15 +30,24 @@ class GerenciadorLogin:
 
     def verificar_usuario(self, email: str, senha: str):
         """
-        Verifica as credenciais do usuário no banco de dados.
-        Agora é um método da classe.
+        Verifica as credenciais e busca os dados do usuário e da empresa associada.
         """
         conn = self._conectar()
         cursor = conn.cursor(dictionary=True)
         
         senha_hash = hashlib.sha256(senha.encode()).hexdigest()
         
-        cursor.execute("SELECT * FROM usuarios WHERE email = %s AND senha = %s", (email, senha_hash))
+        # --- CONSULTA SQL ALTERADA ---
+        # Usamos um LEFT JOIN para buscar o 'empresa_id' da tabela 'empresas'
+        # com base no 'id' do usuário encontrado.
+        sql_query = """
+            SELECT u.id, u.nome, u.tipo, e.id AS empresa_id
+            FROM usuarios u
+            LEFT JOIN empresas e ON u.id = e.usuario_id
+            WHERE u.email = %s AND u.senha = %s
+        """
+        
+        cursor.execute(sql_query, (email, senha_hash))
         usuario = cursor.fetchone()
         
         cursor.close()
@@ -49,8 +56,8 @@ class GerenciadorLogin:
 
     def cadastrar_usuario(self, nome: str, email: str, senha: str, tipo: str):
         """
-        Cadastra um novo usuário no banco de dados.
-        Agora é um método da classe.
+        Cadastra um novo usuário e, se for do tipo 'padrão', cria uma empresa associada.
+        Tudo dentro de uma transação para garantir a integridade.
         """
         conn = self._conectar()
         cursor = conn.cursor()
@@ -58,11 +65,30 @@ class GerenciadorLogin:
         senha_hash = hashlib.sha256(senha.encode()).hexdigest()
         
         try:
-            cursor.execute("INSERT INTO usuarios (nome, email, senha, tipo) VALUES (%s, %s, %s, %s)",
-                           (nome, email, senha_hash, tipo))
+            # Inicia uma transação
+            conn.start_transaction()
+
+            # 1. Insere o novo usuário na tabela 'usuarios'
+            sql_insert_usuario = "INSERT INTO usuarios (nome, email, senha, tipo) VALUES (%s, %s, %s, %s)"
+            cursor.execute(sql_insert_usuario, (nome, email, senha_hash, tipo.lower()))
+            
+            # Pega o ID do usuário que acabamos de criar
+            novo_usuario_id = cursor.lastrowid
+
+            # 2. Se o usuário for do tipo 'padrão', cria uma empresa para ele
+            if tipo.lower() == 'padrão':
+                # O nome fantasia pode ser genérico inicialmente ou vir de outro campo do formulário
+                nome_fantasia_empresa = f"Empresa de {nome}" 
+                sql_insert_empresa = "INSERT INTO empresas (usuario_id, nome_fantasia) VALUES (%s, %s)"
+                cursor.execute(sql_insert_empresa, (novo_usuario_id, nome_fantasia_empresa))
+
+            # 3. Se tudo correu bem, salva as alterações no banco
             conn.commit()
             return True
+            
         except mysql.connector.Error as e:
+            # Se algo der errado, desfaz tudo
+            conn.rollback()
             print(f"Erro ao cadastrar usuário: {e}")
             return False
         finally:

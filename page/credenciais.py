@@ -1,7 +1,7 @@
 # credenciais.py
 
 import streamlit as st
-# 1. A importação muda: importamos a CLASSE específica do módulo.
+# A importação da CLASSE específica do módulo.
 from src.Gerenciadores.gerenciadorLogin import GerenciadorLogin
 
 class CredentialsPage:
@@ -11,7 +11,7 @@ class CredentialsPage:
         Ao criar a página de credenciais, também criamos uma instância
         do nosso gerenciador de login para usar em toda a classe.
         """
-        # 2. Criamos uma instância do gerenciador.
+        # Criamos uma instância do gerenciador.
         self.gerenciador = GerenciadorLogin()
 
     def tela_login(self):
@@ -25,14 +25,21 @@ class CredentialsPage:
                 st.warning("Por favor, preencha o email e a senha.")
                 return
 
-            # 3. Usamos o método da instância do gerenciador.
+            # ---- ALTERAÇÃO IMPORTANTE AQUI ----
+            # Garanta que este método retorne um dicionário com 'id' e 'empresa_id'
             usuario = self.gerenciador.verificar_usuario(email, senha)
             
             if usuario:
-                # MODIFICAÇÃO PRINCIPAL: Ajuste das chaves do session_state
+                # Salva todas as informações necessárias na sessão
                 st.session_state['logado'] = True
                 st.session_state['usuario_nome'] = usuario['nome']
                 st.session_state['usuario_tipo'] = usuario['tipo']
+                
+                # ====> LINHAS ADICIONADAS <====
+                # Estas são as novas linhas essenciais para a página de estoque
+                st.session_state['usuario_id'] = usuario['id']
+                st.session_state['empresa_id'] = usuario['empresa_id'] # Ajuste o nome da chave se for diferente
+
                 st.success(f"Login bem-sucedido! Bem-vindo(a), {usuario['nome']}!")
                 st.rerun()
             else:
@@ -43,7 +50,8 @@ class CredentialsPage:
 
         nome = st.text_input("Nome completo", key="cad_nome")
         email = st.text_input("Email", key="cad_email")
-        tipo = st.selectbox("Tipo de Usuário", ["Padrão", "Admin"], key="cad_tipo")
+        # Ajustado para usar os mesmos valores do ENUM do banco de dados ('padrão', 'admin')
+        tipo = st.selectbox("Tipo de Usuário", ["padrão", "admin"], key="cad_tipo")
         senha = st.text_input("Senha", type="password", key="cad_senha")
         senha2 = st.text_input("Confirme a senha", type="password", key="cad_senha2")
 
@@ -53,7 +61,7 @@ class CredentialsPage:
             elif not all([nome, email, senha, tipo]):
                 st.warning("Preencha todos os campos obrigatórios.")
             else:
-                # 4. Usamos o método da instância do gerenciador aqui também.
+                # Usamos o método da instância do gerenciador aqui também.
                 sucesso = self.gerenciador.cadastrar_usuario(nome, email, senha, tipo)
                 if sucesso:
                     st.success("Usuário cadastrado com sucesso! Agora você pode fazer login.")
@@ -67,4 +75,4 @@ class CredentialsPage:
         if escolha == "Login":
             self.tela_login()
         elif escolha == "Cadastrar":
-            self.tela_cadastro()    
+            self.tela_cadastro()
