@@ -4,7 +4,7 @@ import streamlit as st
 import mysql.connector
 from datetime import datetime
 
-# --- NOVAS ADIÇÕES: Imports para exportação ---
+# Imports para exportação
 import pandas as pd
 from fpdf import FPDF
 import io
@@ -37,10 +37,8 @@ class AdmPage:
             st.error(f"Erro ao conectar ao banco de dados: {err}")
             return None
 
-    # --- NOVAS ADIÇÕES: Funções para buscar histórico e gerar PDF ---
+    # --- Funções de Histórico e Geração de PDF ---
     def _buscar_historico_completo(self, empresa_id: int):
-        """Busca um histórico detalhado das transações para uma empresa."""
-        # Usa uma conexão nova para esta função específica
         conn = self._conectar()
         if conn:
             try:
@@ -65,13 +63,13 @@ class AdmPage:
         return []
 
     def _gerar_pdf(self, df: pd.DataFrame):
-        """Gera um arquivo PDF a partir de um DataFrame do Pandas."""
         pdf = FPDF(orientation='L')
         pdf.add_page()
         pdf.set_font("Arial", size=7)
-        col_width = pdf.w / (len(df.columns) + 1)
+        col_width = pdf.w / (len(df.columns) if df.columns.any() else 1)
         for col in df.columns:
-            pdf.cell(col_width, 10, col.replace('_', ' ').title(), 1, 0, 'C')
+            header = col.replace('_', ' ').title()
+            pdf.cell(col_width, 10, header, 1, 0, 'C')
         pdf.ln()
         for index, row in df.iterrows():
             for item in row:
@@ -79,9 +77,9 @@ class AdmPage:
             pdf.ln()
         return bytes(pdf.output(dest='S'))
         
-    # ---------- MÉTODOS DE BANCO DE DADOS (CRUD) - existentes ------------
+    # --- Métodos de Banco de Dados (CRUD) ---
     def _carregar_empresas(self):
-        self.cursor.execute("SELECT u.id as usuario_id, e.id as empresa_id, e.nome_fantasia FROM empresas e JOIN usuarios u ON e.usuario_id = u.id ORDER BY e.nome_fantasia")
+        self.cursor.execute("SELECT id AS empresa_id, nome_fantasia FROM empresas ORDER BY nome_fantasia")
         return self.cursor.fetchall()
 
     def _carregar_produtos_por_empresa(self, empresa_id):
@@ -102,9 +100,8 @@ class AdmPage:
         self.cursor.execute("DELETE FROM produtos WHERE id = %s", (produto_id,))
         self.conn.commit()
 
-    # ---------- INTERFACE STREAMLIT ---------
+    # --- Interface Streamlit ---
     def _mostrar_formulario_produto(self, produto=None):
-        # (Seu código original do formulário aqui, sem alterações)
         is_alteracao = produto is not None
         titulo = "Alterar Produto" if is_alteracao else "Cadastrar Novo Produto"
         with st.form(key="form_produto"):
@@ -156,25 +153,6 @@ class AdmPage:
         if st.button("← Trocar de Empresa"):
             st.session_state.empresa_selecionada = None; st.session_state.acao = None; st.rerun()
         
-        # --- NOVAS ADIÇÕES: Seção de Histórico e Exportação ---
-        st.markdown("---")
-        st.subheader("Histórico de Movimentações da Empresa")
-        historico_data = self._buscar_historico_completo(empresa['empresa_id'])
-        
-        if historico_data:
-            df_historico = pd.DataFrame(historico_data)
-            st.dataframe(df_historico)
-            
-            st.markdown("##### Exportar Relatório")
-            col1, col2 = st.columns(2)
-            with col1:
-                st.download_button(label="Exportar para .CSV", data=df_historico.to_csv(index=False, sep=';').encode('utf-8'), file_name=f"historico_{empresa['nome_fantasia']}_{datetime.now().strftime('%Y%m%d')}.csv", mime='text/csv')
-            with col2:
-                pdf_bytes = self._gerar_pdf(df_historico)
-                st.download_button(label="Exportar para .PDF", data=pdf_bytes, file_name=f"historico_{empresa['nome_fantasia']}_{datetime.now().strftime('%Y%m%d')}.pdf", mime='application/pdf')
-        else:
-            st.info("Nenhuma movimentação de estoque registrada para esta empresa.")
-        
         # Seção de Gerenciamento de Produtos
         st.markdown("---")
         st.subheader("Gerenciar Produtos da Empresa")
@@ -204,6 +182,27 @@ class AdmPage:
                     if c3.button("🗑️ Excluir", key=f"del_{p['id']}"):
                         self._deletar_produto(p['id']); st.success(f"Produto '{p['nome']}' excluído!"); st.rerun()
                 st.divider()
+
+        # --- SEÇÃO DE HISTÓRICO E EXPORTAÇÃO (AGORA NO FINAL DA PÁGINA) ---
+        st.markdown("---")
+        st.subheader("Histórico de Movimentações da Empresa")
+        historico_data = self._buscar_historico_completo(empresa['empresa_id'])
+        
+        if historico_data:
+            df_historico = pd.DataFrame(historico_data)
+            st.dataframe(df_historico)
+            
+            st.markdown("##### Exportar Relatório")
+            col1, col2 = st.columns(2)
+            with col1:
+                # O nome do arquivo agora inclui o nome da empresa
+                st.download_button(label="Exportar para .CSV", data=df_historico.to_csv(index=False, sep=';').encode('utf-8'), file_name=f"historico_{empresa['nome_fantasia'].replace(' ','_')}_{datetime.now().strftime('%Y%m%d')}.csv", mime='text/csv')
+            with col2:
+                pdf_bytes = self._gerar_pdf(df_historico)
+                st.download_button(label="Exportar para .PDF", data=pdf_bytes, file_name=f"historico_{empresa['nome_fantasia'].replace(' ','_')}_{datetime.now().strftime('%Y%m%d')}.pdf", mime='application/pdf')
+        else:
+            st.info("Nenhuma movimentação de estoque registrada para esta empresa.")
+
 
     def __del__(self):
         if hasattr(self, 'conn') and self.conn and self.conn.is_connected():
