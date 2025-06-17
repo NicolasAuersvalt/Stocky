@@ -152,7 +152,7 @@ class EstoquePage(Page):
                             valor_unitario=valor_unit
                         )
                         if sucesso: st.success(mensagem)
-                        else: st.error(mensagem)
+                        #else: st.error(mensagem)
                         st.session_state.acao_produto = None; st.session_state.modo = None; st.rerun()
 
         # Seção de Histórico
