@@ -30,7 +30,11 @@ class MainPage(Page):
 
         # Exibe a imagem principal
         if self.image_path.exists():
-            st.image(str(self.image_path), width=400)
+            col1, col2, col3 = st.columns([1, 2, 1])
+            with col2:
+                st.image(str(self.image_path), width=400)
+
+
         else:
             st.warning("Imagem não encontrada.")
 
