@@ -2,11 +2,16 @@
 
 import streamlit as st
 import mysql.connector
+from datetime import datetime
+
+# --- NOVAS ADIÇÕES: Imports para exportação ---
+import pandas as pd
+from fpdf import FPDF
+import io
 
 class AdmPage:
     def __init__(self):
-        # ------- Conexão com o banco ----------
-        # MODIFICADO: A classe agora usa seu próprio método para conectar.
+        # Conexão com o banco
         self.conn = self._conectar()
         if self.conn:
             self.cursor = self.conn.cursor(dictionary=True)
@@ -19,8 +24,6 @@ class AdmPage:
         st.session_state.setdefault("acao", None)
         st.session_state.setdefault("produto_selecionado_id", None)
 
-    # NOVO: Método de conexão próprio para esta classe.
-    # É uma boa prática que cada módulo que acessa o DB gerencie sua própria conexão.
     @staticmethod
     def _conectar():
         try:
@@ -34,9 +37,50 @@ class AdmPage:
             st.error(f"Erro ao conectar ao banco de dados: {err}")
             return None
 
-    # ---------- MÉTODOS DE BANCO DE DADOS (CRUD) ------------
+    # --- NOVAS ADIÇÕES: Funções para buscar histórico e gerar PDF ---
+    def _buscar_historico_completo(self, empresa_id: int):
+        """Busca um histórico detalhado das transações para uma empresa."""
+        # Usa uma conexão nova para esta função específica
+        conn = self._conectar()
+        if conn:
+            try:
+                cursor = conn.cursor(dictionary=True)
+                sql_query = """
+                    SELECT 
+                        h.data_transacao, p.nome AS produto, u.nome AS usuario,
+                        h.tipo, h.quantidade_alterada, h.preco_transacao,
+                        h.quantidade_anterior, h.quantidade_nova
+                    FROM historico_transacoes h
+                    JOIN produtos p ON h.produto_id = p.id
+                    JOIN usuarios u ON h.usuario_id = u.id
+                    WHERE p.empresa_id = %s
+                    ORDER BY h.data_transacao DESC
+                """
+                cursor.execute(sql_query, (empresa_id,))
+                return cursor.fetchall()
+            finally:
+                if conn.is_connected():
+                    cursor.close()
+                    conn.close()
+        return []
+
+    def _gerar_pdf(self, df: pd.DataFrame):
+        """Gera um arquivo PDF a partir de um DataFrame do Pandas."""
+        pdf = FPDF(orientation='L')
+        pdf.add_page()
+        pdf.set_font("Arial", size=7)
+        col_width = pdf.w / (len(df.columns) + 1)
+        for col in df.columns:
+            pdf.cell(col_width, 10, col.replace('_', ' ').title(), 1, 0, 'C')
+        pdf.ln()
+        for index, row in df.iterrows():
+            for item in row:
+                pdf.cell(col_width, 10, str(item), 1, 0)
+            pdf.ln()
+        return bytes(pdf.output(dest='S'))
+        
+    # ---------- MÉTODOS DE BANCO DE DADOS (CRUD) - existentes ------------
     def _carregar_empresas(self):
-        # A tabela de empresas agora é consultada pelo seu id na tabela 'empresas'
         self.cursor.execute("SELECT u.id as usuario_id, e.id as empresa_id, e.nome_fantasia FROM empresas e JOIN usuarios u ON e.usuario_id = u.id ORDER BY e.nome_fantasia")
         return self.cursor.fetchall()
 
@@ -60,6 +104,7 @@ class AdmPage:
 
     # ---------- INTERFACE STREAMLIT ---------
     def _mostrar_formulario_produto(self, produto=None):
+        # (Seu código original do formulário aqui, sem alterações)
         is_alteracao = produto is not None
         titulo = "Alterar Produto" if is_alteracao else "Cadastrar Novo Produto"
         with st.form(key="form_produto"):
@@ -79,7 +124,6 @@ class AdmPage:
                             self._atualizar_produto(produto["id"], nome, categoria, quantidade, preco)
                             st.success("Produto atualizado!")
                         else:
-                            # MODIFICADO: Usa o 'empresa_id' que agora é o ID da tabela empresas
                             self._adicionar_produto(nome, categoria, quantidade, preco, st.session_state.empresa_selecionada["empresa_id"])
                             st.success("Produto cadastrado!")
                         st.session_state.acao = None
@@ -87,16 +131,17 @@ class AdmPage:
                     except mysql.connector.Error as err:
                         st.error(f"Erro no banco de dados: {err}")
 
+
     def show(self):
         st.title("Painel do Administrador")
 
+        # Seção 1: Seleção da Empresa
         if 'empresa_selecionada' not in st.session_state or st.session_state.empresa_selecionada is None:
             st.header("1. Selecione uma empresa para gerenciar")
             empresas = self._carregar_empresas()
-            # MODIFICADO: A chave do dicionário agora usa 'nome_fantasia' e 'empresa_id'
             opcoes = {f'{e["nome_fantasia"]} (ID: {e["empresa_id"]})': e for e in empresas}
             if not opcoes:
-                st.warning("Nenhuma empresa (do tipo 'padrão' com perfil de empresa) encontrada para gerenciar.")
+                st.warning("Nenhuma empresa (do tipo 'padrão') encontrada para gerenciar.")
                 return
             
             selecao = st.selectbox("Empresas Disponíveis", opcoes.keys())
@@ -105,15 +150,34 @@ class AdmPage:
                 st.rerun()
             return
 
+        # Seção 2: Gerenciamento da Empresa Selecionada
         empresa = st.session_state.empresa_selecionada
-        # MODIFICADO: Exibe o nome fantasia
-        st.header(f"2. Gerenciando: {empresa['nome_fantasia']}")
+        st.header(f"Gerenciando: {empresa['nome_fantasia']}")
         if st.button("← Trocar de Empresa"):
-            st.session_state.empresa_selecionada = None
-            st.session_state.acao = None
-            st.rerun()
+            st.session_state.empresa_selecionada = None; st.session_state.acao = None; st.rerun()
         
+        # --- NOVAS ADIÇÕES: Seção de Histórico e Exportação ---
         st.markdown("---")
+        st.subheader("Histórico de Movimentações da Empresa")
+        historico_data = self._buscar_historico_completo(empresa['empresa_id'])
+        
+        if historico_data:
+            df_historico = pd.DataFrame(historico_data)
+            st.dataframe(df_historico)
+            
+            st.markdown("##### Exportar Relatório")
+            col1, col2 = st.columns(2)
+            with col1:
+                st.download_button(label="Exportar para .CSV", data=df_historico.to_csv(index=False, sep=';').encode('utf-8'), file_name=f"historico_{empresa['nome_fantasia']}_{datetime.now().strftime('%Y%m%d')}.csv", mime='text/csv')
+            with col2:
+                pdf_bytes = self._gerar_pdf(df_historico)
+                st.download_button(label="Exportar para .PDF", data=pdf_bytes, file_name=f"historico_{empresa['nome_fantasia']}_{datetime.now().strftime('%Y%m%d')}.pdf", mime='application/pdf')
+        else:
+            st.info("Nenhuma movimentação de estoque registrada para esta empresa.")
+        
+        # Seção de Gerenciamento de Produtos
+        st.markdown("---")
+        st.subheader("Gerenciar Produtos da Empresa")
 
         if st.session_state.acao == 'cadastrar':
             self._mostrar_formulario_produto()
@@ -123,7 +187,6 @@ class AdmPage:
                 st.session_state.acao = 'cadastrar'
                 st.rerun()
             
-            # MODIFICADO: Passa o 'empresa_id' para carregar os produtos
             produtos = self._carregar_produtos_por_empresa(empresa["empresa_id"])
             if not produtos:
                 st.info("Nenhum produto cadastrado para esta empresa.")
